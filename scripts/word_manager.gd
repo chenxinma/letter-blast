@@ -33,6 +33,9 @@ func mark_as_found(word: String) -> void:
 	if not found_words.has(uppercase_word):
 		found_words[uppercase_word] = true
 		print("WordManager: Found word: ", uppercase_word)
+		var level_manager := get_tree().get_root().get_node("Main/LevelManager")
+		if level_manager:
+			level_manager.check_level_complete()
 
 func get_remaining_words() -> Array:
 	var remaining := []
