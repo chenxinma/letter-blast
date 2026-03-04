@@ -48,6 +48,12 @@ func get_remaining_words() -> Array:
 			remaining.append(word_key)
 	return remaining
 
+func get_found_words() -> Array:
+	var found := []
+	for word_key in found_words:
+		found.append(word_key)
+	return found
+
 func reset() -> void:
 	found_words.clear()
 	print("WordManager: Reset found words")
