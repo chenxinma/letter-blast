@@ -3,6 +3,7 @@ extends Area2D
 @onready var cell_background: Sprite2D = $cell_background
 @onready var letter_label: Label = $letter_label
 
+const CELL_SIZE = 40
 const COLOR_HIGHLIGHT = Color(1, 0.8, 0, 1)
 const COLOR_USED = Color(0.5, 0.5, 0.5, 0.5)
 
@@ -10,6 +11,7 @@ var letter: String = ""
 var coordinate: Vector2 = Vector2.ZERO
 var is_used: bool = false
 var is_highlighted: bool = false
+var _border_texture_cache: Texture2D
 
 signal cell_selected
 
@@ -46,13 +48,14 @@ class TextureGenerator:
 
 func _ready() -> void:
 	_setup_background()
-	connect("_on_mouse_entered", Callable(self, "_on_mouse_entered"))
-	connect("_on_mouse_exited", Callable(self, "_on_mouse_exited"))
-	connect("_on_input_event", Callable(self, "_on_input_event"))
+	connect("mouse_entered", Callable(self, "_on_mouse_entered"))
+	connect("mouse_exited", Callable(self, "_on_mouse_exited"))
+	connect("input_event", Callable(self, "_on_input_event"))
 
 func _setup_background() -> void:
-	var border_texture := TextureGenerator.create_cell_border(Vector2(40, 40))
-	cell_background.texture = border_texture
+	if not _border_texture_cache:
+		_border_texture_cache = TextureGenerator.create_cell_border(Vector2(CELL_SIZE, CELL_SIZE))
+	cell_background.texture = _border_texture_cache
 	cell_background.modulate = Color(1, 1, 1, 1)
 
 func set_letter(char: String, coord: Vector2) -> void:
