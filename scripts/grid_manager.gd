@@ -30,6 +30,8 @@ const DIRECTIONS: Array[Vector2] = [
 
 func _ready() -> void:
 	randomize()
+	if grid_node:
+		grid_node.queue_free()
 	grid_node = Node2D.new()
 	grid_node.name = "GridNode"
 	add_child(grid_node)
@@ -43,47 +45,25 @@ func generate_grid() -> void:
 	
 	cells.clear()
 	
+	for row in range(GRID_HEIGHT):
+		var row_array: Array[Area2D] = []
+		for col in range(GRID_WIDTH):
+			row_array.append(null)
+		cells.append(row_array)
+	
 	var placed_words: Array = []
 	
 	for word in word_manager.words:
 		if placed_words.size() >= words_per_level:
 			break
 		
-		var placed := place_word_in_grid(word)
-		if placed:
+		if place_word_in_grid(word):
 			placed_words.append(word)
 	
 	for row in range(GRID_HEIGHT):
-		var row_array: Array = []
 		for col in range(GRID_WIDTH):
-			var coord := Vector2(col, row)
-			if cell_template == null:
-				print("ERROR: cell_template is null")
-				continue
-			var cell := cell_template.instantiate() as Area2D
-			if is_valid_coordinate(coord):
-				var existing_cell := get_cell(coord)
-				if existing_cell != null:
-					row_array.append(existing_cell)
-					continue
-			var direction := DIRECTIONS[randi() % DIRECTIONS.size()]
-			var start_x := randi() % GRID_WIDTH
-			var start_y := randi() % GRID_HEIGHT
-			if can_place_word(word, start_x, start_y, direction):
-				do_place_word(word, start_x, start_y, direction)
-				row_array.append(cell)
-				continue
-			cell.set_letter(get_random_letter(), coord)
-			cell.connect("cell_selected", Callable(self, "_on_cell_selected").bind(coord))
-			cell.position = coord * CELL_SIZE
-			grid_node.add_child(cell)
-			row_array.append(cell)
-		cells.append(row_array)
-	
-	for row in range(GRID_HEIGHT):
-		for col in range(GRID_WIDTH):
-			var coord := Vector2(col, row)
-			if get_cell(coord) == null:
+			if cells[row][col] == null:
+				var coord := Vector2(col, row)
 				if cell_template == null:
 					print("ERROR: cell_template is null")
 					continue
@@ -96,7 +76,7 @@ func generate_grid() -> void:
 
 func get_random_letter() -> String:
 	var letters := "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	return letters[OS.rand() % letters.length()]
+	return letters[randi() % letters.length()]
 
 func place_word_in_grid(word: String) -> bool:
 	for _i in range(MAX_PLACEMENT_ATTEMPTS):
@@ -120,9 +100,12 @@ func can_place_word(word: String, start_x: int, start_y: int, direction: Vector2
 		if not is_valid_coordinate(Vector2(x, y)):
 			return false
 		
-		var cell := get_cell(Vector2(x, y))
-		if cell != null and cell.is_used:
-			return false
+		var coord := Vector2(x, y)
+		var cell := get_cell(coord)
+		if cell != null:
+			if cell.is_used:
+				if cell.letter != word[i]:
+					return false
 		
 		x += direction.x
 		y += direction.y
