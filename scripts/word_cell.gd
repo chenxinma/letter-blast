@@ -13,16 +13,53 @@ var is_highlighted: bool = false
 
 signal cell_selected
 
-## Sets the letter and coordinate for this cell
-## @param char: The letter character to display
-## @param coord: The grid coordinate for this cell
+class TextureGenerator:
+	static func create_pixel_art_background(size: Vector2, cell_size: int) -> ImageTexture:
+		var texture := ImageTexture.new()
+		var image := Image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
+		
+		for y in range(size.y):
+			for x in range(size.x):
+				var color := Color(1, 1, 1, 0.1)
+				if (x + y) % 2 == 0:
+					color = Color(0.9, 0.9, 1, 0.3)
+				image.set_pixel(x, y, color)
+		
+		texture.create_from_image(image, 0)
+		return texture
+	
+	static func create_cell_border(size: Vector2) -> ImageTexture:
+		var texture := ImageTexture.new()
+		var image := Image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
+		image.fill(Color(0, 0, 0, 0))
+		
+		for x in range(size.x):
+			image.set_pixel(x, 0, Color(0.2, 0.2, 0.2, 0.5))
+			image.set_pixel(x, size.y - 1, Color(0.2, 0.2, 0.2, 0.5))
+		
+		for y in range(size.y):
+			image.set_pixel(0, y, Color(0.2, 0.2, 0.2, 0.5))
+			image.set_pixel(size.x - 1, y, Color(0.2, 0.2, 0.2, 0.5))
+		
+		texture.create_from_image(image, 0)
+		return texture
+
+func _ready() -> void:
+	_setup_background()
+	connect("_on_mouse_entered", Callable(self, "_on_mouse_entered"))
+	connect("_on_mouse_exited", Callable(self, "_on_mouse_exited"))
+	connect("_on_input_event", Callable(self, "_on_input_event"))
+
+func _setup_background() -> void:
+	var border_texture := TextureGenerator.create_cell_border(Vector2(40, 40))
+	cell_background.texture = border_texture
+	cell_background.modulate = Color(1, 1, 1, 1)
+
 func set_letter(char: String, coord: Vector2) -> void:
 	letter = char
 	coordinate = coord
 	letter_label.text = letter
 
-## Sets whether this cell is used
-## @param used: True to mark as used, false otherwise
 func set_used(used: bool) -> void:
 	is_used = used
 	if is_used:
@@ -37,8 +74,6 @@ func set_used(used: bool) -> void:
 			cell_background.modulate = Color(1, 1, 1, 1)
 		letter_label.modulate = Color(1, 1, 1, 1)
 
-## Sets whether this cell is highlighted
-## @param highlighted: True to highlight, false otherwise
 func set_highlighted(highlighted: bool) -> void:
 	is_highlighted = highlighted
 	if is_used:
@@ -47,11 +82,6 @@ func set_highlighted(highlighted: bool) -> void:
 		cell_background.modulate = COLOR_HIGHLIGHT
 	else:
 		cell_background.modulate = Color(1, 1, 1, 1)
-
-func _ready() -> void:
-	connect("_on_mouse_entered", Callable(self, "_on_mouse_entered"))
-	connect("_on_mouse_exited", Callable(self, "_on_mouse_exited"))
-	connect("_on_input_event", Callable(self, "_on_input_event"))
 
 func _on_mouse_entered() -> void:
 	if not is_used:
@@ -68,4 +98,3 @@ func _on_input_event(event_input: InputEvent) -> void:
 			if not is_used:
 				cell_selected.emit()
 				set_used(true)
-
