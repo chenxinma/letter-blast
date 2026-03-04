@@ -10,7 +10,7 @@ var is_highlighted: bool = false
 
 signal cell_selected
 
-func set_letter(char: String, coordinate: Vector2) -> void:
+func set_letter(char: String, coord: Vector2) -> void:
 	letter = char
 	coord = coordinate
 	letter_label.text = letter
@@ -54,5 +54,3 @@ func _on_input_event(event_input: InputEvent) -> void:
 				emit_signal("cell_selected", self, letter, coord)
 				set_used(true)
 
-func _on_cell_selected() -> void:
-	pass
