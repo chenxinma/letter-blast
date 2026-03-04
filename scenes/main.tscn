@@ -5,10 +5,11 @@
 [ext_resources type="Script" path="res://scripts/input_handler.gd" id="3_input_handler_script"]
 [ext_resources type="Script" path="res://scripts/level_manager.gd" id="4_level_manager_script"]
 [ext_resources type="Script" path="res://scripts/ui_manager.gd" id="5_ui_manager_script"]
-[ext_resources type="PackedScene" path="res://scenes/word_cell.tscn" id="6_cell_scene"]
+[ext_resources type="Script" path="res://scripts/main.gd" id="6_main_script"]
+[ext_resources type="PackedScene" path="res://scenes/word_cell.tscn" id="7_cell_scene"]
 
 [node name="Main" type="Node2D"]
-script = null
+script = ExtResource("6_main_script")
 
 [node name="WordManager" type="Node" parent="."]
 script = ExtResource("1_word_manager_script")
@@ -30,17 +31,9 @@ script = ExtResource("5_ui_manager_script")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="WordManager" type="Node" parent="." index="0"]
-(node_connections)[3] = {
-	"source_node": NodePath("Grid"),
-	"target_node": NodePath("WordManager"),
-	"signal_name": "cell_selected",
-	"call_function": "select_cell"
-}
-
-[node name="GridManager" type="Node2D" parent="." index="1"]
  binds = {}
  export_vars = {
-	"cell_template": SubResource("6_cell_scene"),
+	"cell_template": SubResource("7_cell_scene"),
 	"word_manager": NodePath("../WordManager")
 }
 
