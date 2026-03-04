@@ -1,0 +1,92 @@
+[gd_scene load_steps=2 format=3 uid="uid://main_scene"]
+
+[ext_resources type="Script" path="res://scripts/word_manager.gd" id="1_word_manager_script"]
+[ext_resources type="Script" path="res://scripts/grid_manager.gd" id="2_grid_manager_script"]
+[ext_resources type="Script" path="res://scripts/input_handler.gd" id="3_input_handler_script"]
+[ext_resources type="Script" path="res://scripts/level_manager.gd" id="4_level_manager_script"]
+[ext_resources type="Script" path="res://scripts/ui_manager.gd" id="5_ui_manager_script"]
+[ext_resources type="PackedScene" path="res://scenes/word_cell.tscn" id="6_cell_scene"]
+
+[node name="Main" type="Node2D"]
+script = null
+
+[node name="WordManager" type="Node" parent="."]
+script = ExtResource("1_word_manager_script")
+
+[node name="GridManager" type="Node2D" parent="."]
+script = ExtResource("2_grid_manager_script")
+
+[node name="InputHandler" type="Node" parent="."]
+script = ExtResource("3_input_handler_script")
+
+[node name="LevelManager" type="Node" parent="."]
+script = ExtResource("4_level_manager_script")
+
+[node name="UIManager" type="CanvasLayer" parent="."]
+script = ExtResource("5_ui_manager_script")
+
+[node name="Grid" type="Node2D" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="WordManager" type="Node" parent="." index="0"]
+(node_connections)[3] = {
+	"source_node": NodePath("Grid"),
+	"target_node": NodePath("WordManager"),
+	"signal_name": "cell_selected",
+	"call_function": "select_cell"
+}
+
+[node name="GridManager" type="Node2D" parent="." index="1"]
+ binds = {}
+ export_vars = {
+	"cell_template": SubResource("6_cell_scene"),
+	"word_manager": NodePath("../WordManager")
+}
+
+[node name="InputHandler" type="Node" parent="." index="2"]
+ binds = {}
+ export_vars = {
+	"grid_manager": NodePath("../GridManager"),
+	"word_manager": NodePath("../WordManager")
+}
+
+[node name="LevelManager" type="Node" parent="." index="3"]
+ binds = {}
+ export_vars = {
+	"word_manager": NodePath("../WordManager"),
+	"grid_manager": NodePath("../GridManager")
+}
+
+[node name="UIManager" type="CanvasLayer" parent="." index="4"]
+ binds = {}
+
+[node name="Grid" type="Node2D" parent="." index="5"]
+ binds = {}
+
+[node name="UI" type="CanvasLayer" parent="." index="6"]
+ binds = {}
+
+[node name="WordCountLabel" type="Label" parent="UI"]
+ offset/left = 20.0
+ offset/top = 20.0
+ offset/right = 200.0
+ offset/bottom = 50.0
+ theme_override_colors/font_color = Color(1, 1, 1, 1)
+ theme_override_font_sizes/font_size = 20
+
+[node name="FoundWordsLabel" type="Label" parent="UI"]
+ offset/left = 20.0
+ offset/top = 60.0
+ offset/right = 400.0
+ offset/bottom = 90.0
+ theme_override_colors/font_color = Color(1, 1, 1, 1)
+ theme_override_font_sizes/font_size = 16
+ size_flags_horizontal = FILL
+
+[node name="GridView" type="Control" parent="Grid"]
+ offset/left = 0.0
+ offset/top = 0.0
+ offset/right = 240.0
+ offset/bottom = 1080.0
+ theme_override_colors/font_color = Color(1, 1, 1, 1)
