@@ -70,10 +70,28 @@ func _test_reset() -> void:
 	
 	word_manager.queue_free()
 
+func _test_load_words_missing_file() -> void:
+	var word_manager := WordManager.new()
+	var success := word_manager.load_words()
+	assert(success == false, "load_words should return false for missing file")
+	word_manager.queue_free()
+
+func _test_load_words_invalid_json() -> void:
+	var word_manager := WordManager.new()
+	var file := FileAccess.open("res://data/invalid_words.json", FileAccess.WRITE)
+	if file:
+		file.store_string("{ invalid json }")
+		file.close()
+	var success := word_manager.load_words()
+	assert(success == false, "load_words should return false for invalid JSON")
+	word_manager.queue_free()
+
 func _run_tests() -> void:
 	_test_load_words()
 	_test_is_valid_word()
 	_test_mark_as_found()
 	_test_get_remaining_words()
 	_test_reset()
+	_test_load_words_missing_file()
+	_test_load_words_invalid_json()
 	print("All tests passed!")

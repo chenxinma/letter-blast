@@ -15,9 +15,10 @@ func load_words() -> bool:
 	
 	var json := JSON.new()
 	var data := json.parse(content)
-	if data is Dictionary and data.has("words"):
+	if data is Dictionary and data.has("words") and data["words"] is Array:
 		for word in data["words"]:
-			words[word.to_upper()] = true
+			if word is String:
+				words[word.to_upper()] = true
 		print("WordManager: Loaded ", words.size(), " words")
 		return true
 	else:
