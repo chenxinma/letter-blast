@@ -1,78 +1,50 @@
-[gd_scene load_steps=2 format=3 uid="uid://main_scene"]
+[gd_scene format=3 uid="uid://ci31y58twp02h"]
 
-[ext_resources type="Script" path="res://scripts/word_manager.gd" id="1_word_manager_script"]
-[ext_resources type="Script" path="res://scripts/grid_manager.gd" id="2_grid_manager_script"]
-[ext_resources type="Script" path="res://scripts/input_handler.gd" id="3_input_handler_script"]
-[ext_resources type="Script" path="res://scripts/level_manager.gd" id="4_level_manager_script"]
-[ext_resources type="Script" path="res://scripts/ui_manager.gd" id="5_ui_manager_script"]
-[ext_resources type="Script" path="res://scripts/main.gd" id="6_main_script"]
-[ext_resources type="PackedScene" path="res://scenes/word_cell.tscn" id="7_cell_scene"]
+[ext_resource type="Script" uid="uid://cr4j1po4slwim" path="res://scripts/main.gd" id="1_tefeu"]
+[ext_resource type="Script" uid="uid://cup5xkg5clu5v" path="res://scripts/ui_manager.gd" id="2_o6xl0"]
+[ext_resource type="Script" uid="uid://bxm3ick3a0lwp" path="res://scripts/level_manager.gd" id="3_tipki"]
+[ext_resource type="Script" uid="uid://f3ngqyrhc0qo" path="res://scripts/input_handler.gd" id="4_85g3d"]
+[ext_resource type="Script" uid="uid://bvldgbe5qi3nk" path="res://scripts/grid_manager.gd" id="5_choun"]
+[ext_resource type="Script" uid="uid://dknvoy2pml5j0" path="res://scripts/word_manager.gd" id="6_ya4ey"]
 
-[node name="Main" type="Node2D"]
-script = ExtResource("6_main_script")
+[node name="Main" type="Node2D" unique_id=1518344957]
+script = ExtResource("1_tefeu")
 
-[node name="WordManager" type="Node" parent="."]
-script = ExtResource("1_word_manager_script")
+[node name="UI" type="CanvasLayer" parent="." unique_id=630496416]
 
-[node name="GridManager" type="Node2D" parent="."]
-script = ExtResource("2_grid_manager_script")
+[node name="WordCountLabel" type="Label" parent="UI" unique_id=405665522]
+anchors_preset = -1
+anchor_right = 0.18315972
+anchor_bottom = 0.10030864
+offset_left = 25.0
+offset_top = 16.0
+offset_right = 25.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+metadata/_edit_use_anchors_ = true
 
-[node name="InputHandler" type="Node" parent="."]
-script = ExtResource("3_input_handler_script")
+[node name="FoundWordsLabel" type="Label" parent="UI" unique_id=2026540226]
+offset_right = 40.0
+offset_bottom = 23.0
 
-[node name="LevelManager" type="Node" parent="."]
-script = ExtResource("4_level_manager_script")
+[node name="Grid" type="Node2D" parent="." unique_id=407363728]
 
-[node name="UIManager" type="CanvasLayer" parent="."]
-script = ExtResource("5_ui_manager_script")
+[node name="GridView" type="Control" parent="Grid" unique_id=1288372241]
+layout_mode = 3
+anchors_preset = 0
 
-[node name="Grid" type="Node2D" parent="."]
+[node name="UIManager" type="CanvasLayer" parent="." unique_id=2007601286]
+script = ExtResource("2_o6xl0")
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="LevelManager" type="Node" parent="." unique_id=1723357876]
+script = ExtResource("3_tipki")
 
-[node name="InputHandler" type="Node" parent="." index="2"]
- binds = {}
- export_vars = {
-	"grid_manager": NodePath("../GridManager"),
-	"word_manager": NodePath("../WordManager")
-}
+[node name="InputHandler" type="Node" parent="." unique_id=842641339]
+script = ExtResource("4_85g3d")
 
-[node name="LevelManager" type="Node" parent="." index="3"]
- binds = {}
- export_vars = {
-	"word_manager": NodePath("../WordManager"),
-	"grid_manager": NodePath("../GridManager")
-}
+[node name="GridManager" type="Node2D" parent="." unique_id=1302820426]
+script = ExtResource("5_choun")
 
-[node name="UIManager" type="CanvasLayer" parent="." index="4"]
- binds = {}
-
-[node name="Grid" type="Node2D" parent="." index="5"]
- binds = {}
-
-[node name="UI" type="CanvasLayer" parent="." index="6"]
- binds = {}
-
-[node name="WordCountLabel" type="Label" parent="UI"]
- offset/left = 20.0
- offset/top = 20.0
- offset/right = 200.0
- offset/bottom = 50.0
- theme_override_colors/font_color = Color(1, 1, 1, 1)
- theme_override_font_sizes/font_size = 20
-
-[node name="FoundWordsLabel" type="Label" parent="UI"]
- offset/left = 20.0
- offset/top = 60.0
- offset/right = 400.0
- offset/bottom = 90.0
- theme_override_colors/font_color = Color(1, 1, 1, 1)
- theme_override_font_sizes/font_size = 16
- size_flags_horizontal = FILL
-
-[node name="GridView" type="Control" parent="Grid"]
- offset/left = 0.0
- offset/top = 0.0
- offset/right = 240.0
- offset/bottom = 1080.0
- theme_override_colors/font_color = Color(1, 1, 1, 1)
+[node name="WordManager" type="Node" parent="." unique_id=1391808335]
+script = ExtResource("6_ya4ey")

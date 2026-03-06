@@ -1,3 +1,5 @@
+class_name LevelManager 
+
 extends Node
 
 const MAX_LEVELS: int = 100
@@ -6,7 +8,8 @@ const MAX_LEVELS: int = 100
 @export var grid_manager: GridManager
 
 var current_level: int = 1
-var _level_complete_pending: bool = false
+
+signal level_completed
 
 func _ready() -> void:
 	if not word_manager:
@@ -38,7 +41,7 @@ func level_complete() -> void:
 	print("LevelManager: Level ", current_level, " Complete!")
 	if current_level >= MAX_LEVELS:
 		print("LevelManager: Game Complete - Max level reached!")
-		emit_signal("game_complete")
 		return
 	current_level += 1
+	emit_signal("level_completed")
 	start_level()

@@ -1,3 +1,5 @@
+class_name SoundManager
+
 extends Node
 
 signal word_found(word: String)

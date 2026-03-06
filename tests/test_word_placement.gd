@@ -1,4 +1,4 @@
-class_name GridManagerTest extends Node
+class GridManagerTest extends Node
 
 func _test_word_placement() -> void:
 	var grid_manager := load("res://scripts/grid_manager.gd").new()

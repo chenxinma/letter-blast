@@ -4,7 +4,7 @@ func _test_grid_initialization() -> void:
 	var grid_manager := load("res://scripts/grid_manager.gd").new() as Node
 	grid_manager.connect("cell_selected", Callable(self, "_on_cell_selected"))
 	
-	var test_grid_manager := load("res://scripts/grid_manager.gd").new()
+	var test_grid_manager = load("res://scripts/grid_manager.gd").new()
 	var word_manager := WordManager.new()
 	test_grid_manager.word_manager = word_manager
 	
@@ -16,7 +16,7 @@ func _test_grid_initialization() -> void:
 	test_grid_manager.queue_free()
 
 func _test_get_cell_valid_coordinates() -> void:
-	var grid_manager := load("res://scripts/grid_manager.gd").new()
+	var grid_manager = load("res://scripts/grid_manager.gd").new()
 	grid_manager.GRID_WIDTH = 4
 	grid_manager.GRID_HEIGHT = 18
 	grid_manager.cells = []
@@ -34,7 +34,7 @@ func _test_get_cell_valid_coordinates() -> void:
 	grid_manager.queue_free()
 
 func _test_get_cell_invalid_coordinates() -> void:
-	var grid_manager := load("res://scripts/grid_manager.gd").new()
+	var grid_manager = load("res://scripts/grid_manager.gd").new()
 	grid_manager.GRID_WIDTH = 4
 	grid_manager.GRID_HEIGHT = 18
 	
@@ -46,7 +46,7 @@ func _test_get_cell_invalid_coordinates() -> void:
 	grid_manager.queue_free()
 
 func _test_mark_cells_as_used() -> void:
-	var grid_manager := load("res://scripts/grid_manager.gd").new()
+	var grid_manager = load("res://scripts/grid_manager.gd").new()
 	grid_manager.GRID_WIDTH = 4
 	grid_manager.GRID_HEIGHT = 18
 	grid_manager.cells = []
@@ -63,9 +63,9 @@ func _test_mark_cells_as_used() -> void:
 	grid_manager.queue_free()
 
 func _test_get_cell_returns_null_for_invalid() -> void:
-	var grid_manager := load("res://scripts/grid_manager.gd").new()
+	var grid_manager = load("res://scripts/grid_manager.gd").new()
 	
-	var result := grid_manager.get_cell(Vector2(-1, -1))
+	var result = grid_manager.get_cell(Vector2(-1, -1))
 	assert(result == null, "get_cell should return null for invalid coordinates")
 	
 	result = grid_manager.get_cell(Vector2(100, 100))
@@ -74,15 +74,15 @@ func _test_get_cell_returns_null_for_invalid() -> void:
 	grid_manager.queue_free()
 
 func _test_randomize_called() -> void:
-	var grid_manager := load("res://scripts/grid_manager.gd").new()
+	var grid_manager = load("res://scripts/grid_manager.gd").new()
 	grid_manager._ready()
 	
 	var letters := "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	var letter1 := grid_manager.get_random_letter()
-	var letter2 := grid_manager.get_random_letter()
+	var letter1 = grid_manager.get_random_letter()
+	var letter2 = grid_manager.get_random_letter()
 	
-	assert(letters.has(letter1), "get_random_letter should return a letter")
-	assert(letters.has(letter2), "get_random_letter should return a letter")
+	assert(letters.contains(letter1), "get_random_letter should return a letter")
+	assert(letters.contains(letter2), "get_random_letter should return a letter")
 	
 	grid_manager.queue_free()
 

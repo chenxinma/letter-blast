@@ -1,21 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://cell_scene"]
+[gd_scene format=3 uid="uid://cmli2kxjqey6k"]
 
-[ext_resources type="Script" path="res://scripts/word_cell.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://cwe0feitphcwg" path="res://scripts/word_cell.gd" id="1_script"]
 
-[node name="WordCell" type="Area2D"]
+[node name="WordCell" type="Area2D" unique_id=2076306354]
 script = ExtResource("1_script")
 
-[node name="cell_background" type="Sprite2D" parent="."]
-offset/right = 40.0
-offset/bottom = 40.0
-texture_stretch = 3
+[node name="cell_background" type="Sprite2D" parent="." unique_id=566998161]
 
-[node name="letter_label" type="Label" parent="."]
-offset/right = 40.0
-offset/bottom = 40.0
+[node name="letter_label" type="Label" parent="." unique_id=1691631181]
 theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
 theme_override_font_sizes/font_size = 24
-horizontal_alignment = CENTER
-vertical_alignment = CENTER
-size_flags_horizontal = FILL
-size_flags_vertical = FILL
+horizontal_alignment = 1
+vertical_alignment = 1

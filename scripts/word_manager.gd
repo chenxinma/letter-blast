@@ -1,9 +1,10 @@
+class_name WordManager
+
 extends Node
 
 var words: Dictionary = {}
 var found_words: Dictionary = {}
 var level_manager: Node
-
 
 func _ready() -> void:
 	level_manager = get_node_or_null("../LevelManager")
@@ -18,14 +19,17 @@ func load_words() -> bool:
 	var content := file.get_as_text()
 	file.close()
 	
-	var json := JSON.new()
-	var data := json.parse(content)
-	if data is Dictionary and data.has("words") and data["words"] is Array:
-		for word in data["words"]:
-			if word is String:
-				words[word.to_upper()] = true
-		print("WordManager: Loaded ", words.size(), " words")
-		return true
+	var json = JSON.new()
+	var error = json.parse(content)
+	if error == OK:
+		var data = json.data
+		if data is Dictionary and data.has("words") and data["words"] is Array:
+			for word in data["words"]:
+				if word is String:
+					words[word.to_upper()] = true
+			print("WordManager: Loaded ", words.size(), " words")
+			return true
+		return false
 	else:
 		print("ERROR: JSON parse failed: ", json.get_error_message())
 		return false
@@ -57,5 +61,3 @@ func get_found_words() -> Array:
 func reset() -> void:
 	found_words.clear()
 	print("WordManager: Reset found words")
-
-

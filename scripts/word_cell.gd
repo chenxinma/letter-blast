@@ -3,7 +3,7 @@ extends Area2D
 @onready var cell_background: Sprite2D = $cell_background
 @onready var letter_label: Label = $letter_label
 
-const CELL_SIZE = 40
+const CELL_SIZE = 60
 const COLOR_HIGHLIGHT = Color(1, 0.8, 0, 1)
 const COLOR_USED = Color(0.5, 0.5, 0.5, 0.5)
 
@@ -16,8 +16,7 @@ var _border_texture_cache: Texture2D
 signal cell_selected
 
 class TextureGenerator:
-	static func create_pixel_art_background(size: Vector2, cell_size: int) -> ImageTexture:
-		var texture := ImageTexture.new()
+	static func create_pixel_art_background(size: Vector2) -> ImageTexture:
 		var image := Image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
 		
 		for y in range(size.y):
@@ -27,11 +26,9 @@ class TextureGenerator:
 					color = Color(0.9, 0.9, 1, 0.3)
 				image.set_pixel(x, y, color)
 		
-		texture.create_from_image(image, 0)
-		return texture
+		return ImageTexture.create_from_image(image)
 	
 	static func create_cell_border(size: Vector2) -> ImageTexture:
-		var texture := ImageTexture.new()
 		var image := Image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
 		image.fill(Color(0, 0, 0, 0))
 		
@@ -43,8 +40,7 @@ class TextureGenerator:
 			image.set_pixel(0, y, Color(0.2, 0.2, 0.2, 0.5))
 			image.set_pixel(size.x - 1, y, Color(0.2, 0.2, 0.2, 0.5))
 		
-		texture.create_from_image(image, 0)
-		return texture
+		return ImageTexture.create_from_image(image)
 
 func _ready() -> void:
 	_setup_background()
@@ -58,8 +54,8 @@ func _setup_background() -> void:
 	cell_background.texture = _border_texture_cache
 	cell_background.modulate = Color(1, 1, 1, 1)
 
-func set_letter(char: String, coord: Vector2) -> void:
-	letter = char
+func set_letter(c: String, coord: Vector2) -> void:
+	letter = c
 	coordinate = coord
 	letter_label.text = letter
 

@@ -1,3 +1,5 @@
+class_name GridManager
+
 extends Node2D
 
 @export var word_manager: WordManager
@@ -9,7 +11,7 @@ const GRID_HEIGHT: int = 18
 const CELL_SIZE: int = 60
 const MAX_PLACEMENT_ATTEMPTS: int = 100
 
-var cells: Array[Array[Area2D]] = []
+var cells = []
 var grid_node: Node2D
 
 signal cell_selected(coord: Vector2)
@@ -35,7 +37,8 @@ func _ready() -> void:
 	grid_node = Node2D.new()
 	grid_node.name = "GridNode"
 	add_child(grid_node)
-	generate_grid()
+	# Generate grid after word_manager is assigned
+	call_deferred("generate_grid")
 
 func generate_grid() -> void:
 	for row in cells:
@@ -68,10 +71,10 @@ func generate_grid() -> void:
 					print("ERROR: cell_template is null")
 					continue
 				var cell := cell_template.instantiate() as Area2D
-				cell.set_letter(get_random_letter(), coord)
-				cell.connect("cell_selected", Callable(self, "_on_cell_selected").bind(coord))
 				cell.position = coord * CELL_SIZE
 				grid_node.add_child(cell)
+				cell.set_letter(get_random_letter(), coord)
+				cell.connect("cell_selected", Callable(self, "_on_cell_selected").bind(coord))
 				cells[row][col] = cell
 
 func get_random_letter() -> String:
