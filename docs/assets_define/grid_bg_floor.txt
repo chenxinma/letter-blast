@@ -1,0 +1,1 @@
+4x6 pixel art, modern retro style, floor tile pattern, neutral gray color, pixel-perfect tile texture, no outlines, soft shadows, 8x8 grid pattern visible, Game asset, clean edges, 2D top-down view, official art --v 5.2 --ar 4:6 --pixel-perfect

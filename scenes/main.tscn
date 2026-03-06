@@ -1,50 +1,71 @@
-[gd_scene format=3 uid="uid://ci31y58twp02h"]
+[gd_scene format=3 uid="uid://21aca64rufkw"]
 
-[ext_resource type="Script" uid="uid://cr4j1po4slwim" path="res://scripts/main.gd" id="1_tefeu"]
-[ext_resource type="Script" uid="uid://cup5xkg5clu5v" path="res://scripts/ui_manager.gd" id="2_o6xl0"]
-[ext_resource type="Script" uid="uid://bxm3ick3a0lwp" path="res://scripts/level_manager.gd" id="3_tipki"]
-[ext_resource type="Script" uid="uid://f3ngqyrhc0qo" path="res://scripts/input_handler.gd" id="4_85g3d"]
-[ext_resource type="Script" uid="uid://bvldgbe5qi3nk" path="res://scripts/grid_manager.gd" id="5_choun"]
-[ext_resource type="Script" uid="uid://dknvoy2pml5j0" path="res://scripts/word_manager.gd" id="6_ya4ey"]
+[ext_resource type="Script" uid="uid://cr4j1po4slwim" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://cup5xkg5clu5v" path="res://scripts/ui_manager.gd" id="2_ui"]
+[ext_resource type="Script" uid="uid://bxm3ick3a0lwp" path="res://scripts/level_manager.gd" id="3_level"]
+[ext_resource type="Script" uid="uid://f3ngqyrhc0qo" path="res://scripts/input_handler.gd" id="4_input"]
+[ext_resource type="Script" uid="uid://bvldgbe5qi3nk" path="res://scripts/grid_manager.gd" id="5_grid"]
+[ext_resource type="Script" uid="uid://dknvoy2pml5j0" path="res://scripts/word_manager.gd" id="6_word"]
 
 [node name="Main" type="Node2D" unique_id=1518344957]
-script = ExtResource("1_tefeu")
+script = ExtResource("1_main")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=630496416]
+
+[node name="LevelLabel" type="Label" parent="UI" unique_id=1000000001]
+offset_left = 25.0
+offset_top = 16.0
+offset_right = 150.0
+offset_bottom = 36.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+
+[node name="ScoreLabel" type="Label" parent="UI" unique_id=1000000002]
+offset_left = 300.0
+offset_top = 16.0
+offset_right = 450.0
+offset_bottom = 36.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+
+[node name="TimeLabel" type="Label" parent="UI" unique_id=1000000003]
+offset_left = 500.0
+offset_top = 16.0
+offset_right = 650.0
+offset_bottom = 36.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
 
 [node name="WordCountLabel" type="Label" parent="UI" unique_id=405665522]
 anchors_preset = -1
 anchor_right = 0.18315972
 anchor_bottom = 0.10030864
-offset_left = 25.0
-offset_top = 16.0
-offset_right = 25.0
-offset_bottom = 16.0
+offset_left = 26.0
+offset_top = 553.0
+offset_right = 26.0
+offset_bottom = 553.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 20
 metadata/_edit_use_anchors_ = true
 
 [node name="FoundWordsLabel" type="Label" parent="UI" unique_id=2026540226]
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="Grid" type="Node2D" parent="." unique_id=407363728]
-
-[node name="GridView" type="Control" parent="Grid" unique_id=1288372241]
-layout_mode = 3
-anchors_preset = 0
+offset_left = 36.0
+offset_top = 477.0
+offset_right = 76.0
+offset_bottom = 500.0
 
 [node name="UIManager" type="CanvasLayer" parent="." unique_id=2007601286]
-script = ExtResource("2_o6xl0")
+script = ExtResource("2_ui")
 
 [node name="LevelManager" type="Node" parent="." unique_id=1723357876]
-script = ExtResource("3_tipki")
+script = ExtResource("3_level")
 
 [node name="InputHandler" type="Node" parent="." unique_id=842641339]
-script = ExtResource("4_85g3d")
-
-[node name="GridManager" type="Node2D" parent="." unique_id=1302820426]
-script = ExtResource("5_choun")
+script = ExtResource("4_input")
 
 [node name="WordManager" type="Node" parent="." unique_id=1391808335]
-script = ExtResource("6_ya4ey")
+script = ExtResource("6_word")
+
+[node name="GridManager" type="Node2D" parent="." unique_id=1302820426]
+position = Vector2(30, 170)
+script = ExtResource("5_grid")

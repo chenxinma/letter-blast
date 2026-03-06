@@ -1,0 +1,1 @@
+60x60 pixel art, modern retro style, debug grid cell, white background #FFFFFF, gray grid lines #808080, clean pixel edges, visible 8x8 grid pattern, debugging tool UI, official art, centered square --v 5.2 --ar 1:1 --pixel-perfect

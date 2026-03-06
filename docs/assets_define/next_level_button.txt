@@ -1,0 +1,1 @@
+400x100 pixel art, modern retro style, game button, warm brown #A07350 border, light green #D1FFD1 fill, white pixel font 'NEXT LEVEL', clean pixel edges, hover highlight state, retro gaming button, official art, centered text --v 5.2 --ar 4:1 --pixel-perfect

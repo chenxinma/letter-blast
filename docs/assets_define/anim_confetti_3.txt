@@ -1,0 +1,1 @@
+100x100 pixel art, modern retro style, confetti animation frame 3, red square #FF0000, blue square #0000FF, green square #00FF00, yellow square #FFFF00, clean pixel edges, scattered positions with outward movement, retro game animation, official art, centered pattern --v 5.2 --ar 1:1 --pixel-perfect

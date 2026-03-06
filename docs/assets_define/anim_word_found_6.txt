@@ -1,0 +1,1 @@
+300x100 pixel art, modern retro style, word found animation frame 6, fading out, very light yellow #FFFFE0, semi-transparent white pixel word 'APPLE', clean pixel edges, final fade out, retro game animation, official art, centered text --v 5.2 --ar 3:1 --pixel-perfect

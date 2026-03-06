@@ -25,6 +25,7 @@ func handle_mouse_motion(event: InputEventMouseMotion) -> void:
 
 
 func handle_mouse_release(event: InputEventMouseButton) -> void:
+	print("handle_mouse_release")
 	if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 		if selected_path.size() >= 2:
 			validate_word()
@@ -39,12 +40,14 @@ func select_cell(coord: Vector2) -> void:
 	var cell = grid_manager.get_cell(coord)
 	if cell == null or cell.is_used:
 		return
-	
+
 	if selected_path.is_empty():
 		selected_path.append(coord)
+		cell.set_highlighted(true)
 	else:
 		if is_adjacent_to_last(coord) and not coord in selected_path:
 			selected_path.append(coord)
+			cell.set_highlighted(true)
 	
 	update_current_word()
 
@@ -57,7 +60,7 @@ func is_adjacent_to_last(coord: Vector2) -> bool:
 	var dx = abs(coord.x - last_coord.x)
 	var dy = abs(coord.y - last_coord.y)
 	
-	return dx <= 1 and dy <= 1 and (dx > 0 or dy > 0)
+	return (dx == 1 and dy == 0) or (dx == 0 and dy == 1)
 
 
 func update_current_word() -> void:
@@ -81,9 +84,17 @@ func validate_word() -> void:
 
 
 func clear_selection() -> void:
+	for coord in selected_path:
+		var cell = grid_manager.get_cell(coord)
+		if cell != null:
+			cell.set_highlighted(false)
 	selected_path.clear()
 	current_word = ""
+	print("clear_selection")
 
 
 func mouse_to_grid(mouse_pos: Vector2) -> Vector2:
-	return Vector2(int(mouse_pos.x / cell_size), int(mouse_pos.y / cell_size))
+	var grid_position := grid_manager.position
+	var relative_pos := mouse_pos - grid_position
+	return Vector2(int(ceil(relative_pos.x / cell_size)) - 1,
+				   int(ceil(relative_pos.y / cell_size)) - 1)

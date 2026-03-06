@@ -1,0 +1,1 @@
+600x600 pixel art, modern retro style, results panel background, warm brown #A07350 border, light gradient background #E6D2A5 to #FFFFFF, clean pixel edges, centered layout, retro game result screen, official art, no text overlay --v 5.2 --ar 1:1 --pixel-perfect

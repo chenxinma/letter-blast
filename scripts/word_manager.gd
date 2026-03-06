@@ -6,6 +6,8 @@ var words: Dictionary = {}
 var found_words: Dictionary = {}
 var level_manager: Node
 
+@export var word_count: int = 5
+
 func _ready() -> void:
 	level_manager = get_node_or_null("../LevelManager")
 
@@ -34,8 +36,27 @@ func load_words() -> bool:
 		print("ERROR: JSON parse failed: ", json.get_error_message())
 		return false
 
+
+func get_level_word_count() -> int:
+	return word_count
+
+
 func is_valid_word(word: String) -> bool:
 	return words.has(word.to_upper())
+
+
+func get_assigned_words() -> Array:
+	var remaining := get_remaining_words()
+	var assigned := []
+	var word_limit = 5
+	if level_manager and level_manager.has_method("get_level_word_count"):
+		word_limit = level_manager.get_level_word_count()
+	for word in remaining:
+		if assigned.size() >= word_limit:
+			break
+		assigned.append(word)
+	return assigned
+
 
 func mark_as_found(word: String) -> void:
 	var uppercase_word := word.to_upper()
@@ -45,6 +66,7 @@ func mark_as_found(word: String) -> void:
 		if level_manager and level_manager.has_method("check_level_complete"):
 			level_manager.check_level_complete()
 
+
 func get_remaining_words() -> Array:
 	var remaining := []
 	for word_key in words:
@@ -52,11 +74,13 @@ func get_remaining_words() -> Array:
 			remaining.append(word_key)
 	return remaining
 
+
 func get_found_words() -> Array:
 	var found := []
 	for word_key in found_words:
 		found.append(word_key)
 	return found
+
 
 func reset() -> void:
 	found_words.clear()

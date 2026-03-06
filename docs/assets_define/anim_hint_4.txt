@@ -1,0 +1,1 @@
+64x64 pixel art, modern retro style, hint animation frame 4, bright light blue #00FFFF, question mark '؟' centered, clean pixel edges, large scale, particle sparks fading, retro game animation, official art, centered icon --v 5.2 --ar 1:1 --pixel-perfect

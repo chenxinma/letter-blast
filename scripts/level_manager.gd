@@ -8,25 +8,9 @@ const MAX_LEVELS: int = 100
 @export var grid_manager: GridManager
 
 var current_level: int = 1
+var assigned_words: Array = []
 
 signal level_completed
-
-func _ready() -> void:
-	if not word_manager:
-		print("ERROR: word_manager is not assigned")
-		return
-	if not grid_manager:
-		print("ERROR: grid_manager is not assigned")
-		return
-
-
-func start_level() -> void:
-	if not word_manager or not grid_manager:
-		print("ERROR: Required managers not assigned")
-		return
-	word_manager.reset()
-	grid_manager.generate_grid()
-	print("LevelManager: Starting Level ", current_level)
 
 
 func check_level_complete() -> void:
@@ -44,4 +28,27 @@ func level_complete() -> void:
 		return
 	current_level += 1
 	emit_signal("level_completed")
-	start_level()
+
+
+func get_level_word_count() -> int:
+	var word_count = 5
+	if current_level >= 1 and current_level <= 3:
+		word_count = 3
+	elif current_level >= 4 and current_level <= 6:
+		word_count = 5
+	elif current_level >= 7 and current_level <= 10:
+		word_count = 6
+	else:
+		word_count = 8
+	return word_count
+
+
+func assign_words() -> void:
+	var word_limit = get_level_word_count()
+	var remaining := word_manager.get_remaining_words()
+	assigned_words.clear()
+	
+	for word in remaining:
+		if assigned_words.size() >= word_limit:
+			break
+		assigned_words.append(word)

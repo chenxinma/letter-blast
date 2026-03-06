@@ -1,0 +1,1 @@
+60x60 pixel art, modern retro style, used word cell, gray color #808080 with 50% opacity, no letter visible, clean pixel edges, semi-transparent, Game UI element, official art, centered square, no outlines --v 5.2 --ar 1:1 --pixel-perfect

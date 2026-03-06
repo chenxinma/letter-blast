@@ -1,0 +1,1 @@
+600x800 pixel art, modern retro style, level select frame, warm brown #A07350 border, semi-transparent white background, clean pixel edges, centered layout, retro level selection UI, official art, no text overlay --v 5.2 --ar 3:4 --pixel-perfect

@@ -4,10 +4,10 @@ extends Node2D
 
 @export var word_manager: WordManager
 @export var cell_template: PackedScene
-@export var words_per_level: int = 5
 
-const GRID_WIDTH: int = 4
-const GRID_HEIGHT: int = 18
+const GRID_WIDTH: int = 18
+# 4列 × 18行
+const GRID_HEIGHT: int = 4
 const CELL_SIZE: int = 60
 const MAX_PLACEMENT_ATTEMPTS: int = 100
 
@@ -37,8 +37,6 @@ func _ready() -> void:
 	grid_node = Node2D.new()
 	grid_node.name = "GridNode"
 	add_child(grid_node)
-	# Generate grid after word_manager is assigned
-	call_deferred("generate_grid")
 
 func generate_grid() -> void:
 	for row in cells:
@@ -54,27 +52,26 @@ func generate_grid() -> void:
 			row_array.append(null)
 		cells.append(row_array)
 	
-	var placed_words: Array = []
+	var assigned_words: Array = []
+	if word_manager.has_method("get_assigned_words"):
+		assigned_words = word_manager.get_assigned_words()
 	
-	for word in word_manager.words:
-		if placed_words.size() >= words_per_level:
-			break
-		
-		if place_word_in_grid(word):
-			placed_words.append(word)
+	if cell_template == null:
+		print("ERROR: cell_template is null")
+		return
 	
+	for word in assigned_words:
+		print(word)
+		place_word_in_grid(word)
+
 	for row in range(GRID_HEIGHT):
 		for col in range(GRID_WIDTH):
 			if cells[row][col] == null:
 				var coord := Vector2(col, row)
-				if cell_template == null:
-					print("ERROR: cell_template is null")
-					continue
 				var cell := cell_template.instantiate() as Area2D
-				cell.position = coord * CELL_SIZE
+				cell.position = coord * CELL_SIZE + Vector2(CELL_SIZE / 2.0, CELL_SIZE / 2.0)
 				grid_node.add_child(cell)
 				cell.set_letter(get_random_letter(), coord)
-				cell.connect("cell_selected", Callable(self, "_on_cell_selected").bind(coord))
 				cells[row][col] = cell
 
 func get_random_letter() -> String:
@@ -110,8 +107,8 @@ func can_place_word(word: String, start_x: int, start_y: int, direction: Vector2
 				if cell.letter != word[i]:
 					return false
 		
-		x += direction.x
-		y += direction.y
+		x += int(direction.x)
+		y += int(direction.y)
 	
 	return true
 
@@ -121,12 +118,13 @@ func do_place_word(word: String, start_x: int, start_y: int, direction: Vector2)
 	
 	for i in range(word.length()):
 		var coord := Vector2(x, y)
-		var cell := get_cell(coord)
-		if cell != null:
-			cell.set_letter(word[i], coord)
-			cell.set_used(true)
-		x += direction.x
-		y += direction.y
+		var cell := cell_template.instantiate() as Area2D
+		cell.position = coord * CELL_SIZE + Vector2(CELL_SIZE / 2.0, CELL_SIZE / 2.0)
+		grid_node.add_child(cell)
+		cell.set_letter(word[i], coord)
+		cells[coord.y][coord.x] = cell
+		x += int(direction.x)
+		y += int(direction.y)
 
 func mark_cells_as_used(coordinates: Array) -> void:
 	for coord in coordinates:

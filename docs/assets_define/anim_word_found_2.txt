@@ -1,0 +1,1 @@
+300x100 pixel art, modern retro style, word found animation frame 2, bright yellow background #FFFFE0, white pixel word 'APPLE', clean pixel edges, expand effect, retro game animation, official art, centered text --v 5.2 --ar 3:1 --pixel-perfect

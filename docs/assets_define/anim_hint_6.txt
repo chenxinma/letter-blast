@@ -1,0 +1,1 @@
+64x64 pixel art, modern retro style, hint animation frame 6, light blue #ADD8E6, question mark '؟' centered, clean pixel edges, small scale, almost faded, retro game animation, official art, centered icon --v 5.2 --ar 1:1 --pixel-perfect

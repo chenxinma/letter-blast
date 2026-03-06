@@ -1,0 +1,1 @@
+600x400 pixel art, modern retro style, tutorial panel 3, warm brown #A07350 border, semi-transparent white background, white pixel text '3. FORM VALID WORDS TO SCORE', clean pixel edges, retro tutorial UI, official art, centered text --v 5.2 --ar 3:2 --pixel-perfect
