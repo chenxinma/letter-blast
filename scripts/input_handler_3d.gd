@@ -4,48 +4,37 @@ signal word_validated(word: String, is_valid: bool)
 
 var grid_manager: GridManager3D
 var word_manager: WordManager
-var is_selecting: bool = false
-var selection_start_coord: Vector2 = Vector2(-1, -1)
+var selected_path: Array[Vector2] = []
+var current_word: String = ""
 
 func handle_mouse_press(event: InputEvent) -> void:
+	if event.button_index != MOUSE_BUTTON_LEFT or not event.pressed:
+		return
+	
 	var mouse_pos = event.position
 	var cell = _get_cell_under_mouse(mouse_pos)
 	
 	if cell:
-		is_selecting = true
-		selection_start_coord = cell.coordinate
-		grid_manager.highlight_cell(cell.coordinate, true)
+		select_cell(cell.coordinate)
 
-func handle_mouse_release(_event: InputEvent) -> void:
-	if not is_selecting:
+func handle_mouse_release(event: InputEvent) -> void:
+	if event.button_index != MOUSE_BUTTON_LEFT or event.pressed:
 		return
 	
-	is_selecting = false
-	
-	var word = grid_manager.get_selected_letters()
-	var coords = grid_manager.get_selected_coordinates()
-	
-	if word.length() > 0:
-		var is_valid = word_manager.is_valid_word(word)
-		emit_signal("word_validated", word, is_valid)
-		
-		if is_valid:
-			grid_manager.mark_used(coords)
-	
-	grid_manager.clear_highlights()
-	selection_start_coord = Vector2(-1, -1)
+	if selected_path.size() >= 2:
+		validate_word()
+	else:
+		clear_selection()
 
 func handle_mouse_motion(event: InputEvent) -> void:
-	if not is_selecting:
+	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) or selected_path.is_empty():
 		return
 	
 	var mouse_pos = event.position
 	var cell = _get_cell_under_mouse(mouse_pos)
 	
 	if cell:
-		var current_coord = cell.coordinate
-		if current_coord != selection_start_coord:
-			_handle_line_selection(selection_start_coord, current_coord)
+		select_cell(cell.coordinate)
 
 func _get_cell_under_mouse(mouse_pos: Vector2) -> Node:
 	var camera = get_viewport().get_camera_3d()
@@ -53,39 +42,70 @@ func _get_cell_under_mouse(mouse_pos: Vector2) -> Node:
 		return null
 	
 	var from = camera.project_ray_origin(mouse_pos)
-	var to = from + camera.project_ray_normal(mouse_pos) * 1000
+	var normal = camera.project_ray_normal(mouse_pos)
+	var to = from + normal * 1000
 	
-	var space_state = get_viewport().world_3d.direct_space_state
+	var space_state = camera.get_world_3d().direct_space_state
 	var query = PhysicsRayQueryParameters3D.create(from, to)
-	var result = space_state.intersect_ray(query)
+	query.collide_with_areas = true
+	query.collide_with_bodies = false
+	query.collision_mask = 2
 	
+	var result = space_state.intersect_ray(query)
 	if result and result.has("collider"):
 		return result["collider"]
 	return null
 
-func _handle_line_selection(start: Vector2, end: Vector2) -> void:
-	grid_manager.clear_highlights()
+func select_cell(coord: Vector2) -> void:
+	if not grid_manager.is_valid_coordinate(coord):
+		return
 	
-	var cells_in_line = _get_cells_in_line(start, end)
-	for coord in cells_in_line:
-		grid_manager.highlight_cell(coord, true)
+	var cell = grid_manager.get_cell_at(coord)
+	if cell == null or cell.is_used:
+		return
+	
+	if selected_path.is_empty():
+		selected_path.append(coord)
+		cell.set_highlighted(true)
+	else:
+		if _is_adjacent_to_last(coord) and not coord in selected_path:
+			selected_path.append(coord)
+			cell.set_highlighted(true)
+	
+	_update_current_word()
 
-func _get_cells_in_line(start: Vector2, end: Vector2) -> Array[Vector2]:
-	var result: Array[Vector2] = []
+func _is_adjacent_to_last(coord: Vector2) -> bool:
+	if selected_path.is_empty():
+		return false
 	
-	var dx = int(end.x - start.x)
-	var dy = int(end.y - start.y)
-	var steps = max(abs(dx), abs(dy))
+	var last_coord = selected_path[-1]
+	var dx = abs(coord.x - last_coord.x)
+	var dy = abs(coord.y - last_coord.y)
 	
-	if steps == 0:
-		result.append(start)
-		return result
+	return (dx == 1 and dy == 0) or (dx == 0 and dy == 1) or (dx == 1 and dy == 1)
+
+func _update_current_word() -> void:
+	current_word = ""
+	for coord in selected_path:
+		var cell = grid_manager.get_cell_at(coord)
+		if cell != null:
+			current_word += cell.letter
+
+func validate_word() -> void:
+	if current_word.length() >= 2:
+		if word_manager.is_valid_word(current_word):
+			grid_manager.mark_used(selected_path)
+			word_manager.mark_as_found(current_word)
+			emit_signal("word_validated", current_word, true)
+		else:
+			emit_signal("word_validated", current_word, false)
 	
-	var x_inc = dx / steps
-	var y_inc = dy / steps
-	
-	for i in range(steps + 1):
-		var coord = Vector2(int(start.x) + i * x_inc, int(start.y) + i * y_inc)
-		result.append(coord)
-	
-	return result
+	clear_selection()
+
+func clear_selection() -> void:
+	for coord in selected_path:
+		var cell = grid_manager.get_cell_at(coord)
+		if cell != null:
+			cell.set_highlighted(false)
+	selected_path.clear()
+	current_word = ""

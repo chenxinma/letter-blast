@@ -8,9 +8,11 @@ shading_mode = 0
 vertex_color_use_as_albedo = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1"]
-size = Vector3(1, 1, 0.1)
+size = Vector3(0.3, 0.3, 0.1)
 
 [node name="WordCell3D" type="Area3D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_cell")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

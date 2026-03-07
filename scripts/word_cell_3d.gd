@@ -7,6 +7,7 @@ const CELL_SIZE = 60
 const COLOR_HIGHLIGHT = Color(0.361, 0.486, 0.392, 1.0)
 const COLOR_HINT = Color(0.643, 0.349, 0.671, 0.5)
 const COLOR_USED = Color(0.5, 0.5, 0.5, 0.5)
+const COLOR_NORMAL = Color(1.0, 1.0, 1.0, 0.5)
 
 var letter: String = ""
 var coordinate: Vector2 = Vector2.ZERO
@@ -36,7 +37,7 @@ func _setup_sprite() -> void:
 	if not _border_texture_cache:
 		_border_texture_cache = TextureGenerator.create_cell_border(Vector2(CELL_SIZE, CELL_SIZE))
 	sprite_3d.texture = _border_texture_cache
-	sprite_3d.modulate = Color(1.0, 1.0, 1.0, 0.5)
+	sprite_3d.modulate = COLOR_NORMAL
 
 func set_hint() -> void:
 	sprite_3d.modulate = COLOR_HINT
@@ -71,7 +72,7 @@ func set_highlighted(highlighted: bool) -> void:
 		if sprite_3d:
 			sprite_3d.modulate = Color(1, 1, 0, 1)
 	elif sprite_3d:
-		sprite_3d.modulate = Color(1, 1, 1, 1)
+		sprite_3d.modulate = COLOR_NORMAL
 
 func get_world_position() -> Vector3:
 	return global_position
