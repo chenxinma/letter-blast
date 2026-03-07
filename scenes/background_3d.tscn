@@ -6,7 +6,7 @@ size = Vector2(20, 30)
 [node name="Background3D" type="Node3D"]
 
 [node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 30, 0, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh = SubResource("PlaneMesh_1")
 
 [node name="Background" type="Sprite3D" parent="."]
