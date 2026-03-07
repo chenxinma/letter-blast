@@ -12,10 +12,11 @@ var score_manager: ScoreManager
 var story_manager: StoryManager
 var hint_manager: HintManager
 var camera_initial_position: Vector3
-var time_elapsed: float = 0.0
-var camera_sway_enabled: bool = true
-var sway_amplitude: float = 0.005
-var sway_speed: float = 0.5
+var camera_target_offset: Vector3 = Vector3.ZERO
+var camera_current_offset: Vector3 = Vector3.ZERO
+var mouse_follow_enabled: bool = true
+var follow_strength: float = 0.15
+var follow_smoothing: float = 8.0
 
 func _ready() -> void:
 	grid_manager.word_manager = word_manager
@@ -37,14 +38,15 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if camera_sway_enabled and camera:
-		time_elapsed += delta
-		var sway_offset = Vector3(
-			sin(time_elapsed * sway_speed * 1.3) * sway_amplitude,
-			sin(time_elapsed * sway_speed) * sway_amplitude,
-			0
-		)
-		camera.position = camera_initial_position + sway_offset
+	if mouse_follow_enabled and camera:
+		var viewport_size = get_viewport().get_visible_rect().size
+		var mouse_pos = get_viewport().get_mouse_position()
+		var normalized_x = (mouse_pos.x / viewport_size.x - 0.5) * 2.0
+		var normalized_y = (mouse_pos.y / viewport_size.y - 0.5) * 2.0
+		camera_target_offset.x = normalized_x * follow_strength
+		camera_target_offset.y = -normalized_y * follow_strength * 0.5
+		camera_current_offset = camera_current_offset.lerp(camera_target_offset, follow_smoothing * delta)
+		camera.position = camera_initial_position + camera_current_offset
 
 
 func _input(event: InputEvent) -> void:
