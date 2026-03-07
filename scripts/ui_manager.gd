@@ -16,12 +16,14 @@ var word_score_display_time: float = 0.0
 signal countdown_finished()
 
 func _ready() -> void:
-	score_label = get_node_or_null("/root/Main/UI/ScoreLabel")
-	found_words_label = get_node_or_null("/root/Main/UI/FoundWordsLabel")
-	word_meanings_label = get_node_or_null("/root/Main/UI/WordMeaningsLabel")
-	word_manager = get_node_or_null("/root/Main/WordManager")
-	timer_manager = get_node_or_null("/root/Main/TimerManager")
-	score_manager = get_node_or_null("/root/Main/ScoreManager")
+	score_label = get_node_or_null("/root/Main3D/UI/ScoreLabel")
+	found_words_label = get_node_or_null("/root/Main3D/UI/FoundWordsLabel")
+	word_meanings_label = get_node_or_null("/root/Main3D/UI/WordMeaningsLabel")
+	word_manager = get_node_or_null("/root/Main3D/WordManager")
+	timer_manager = get_node_or_null("/root/Main3D/TimerManager")
+	score_manager = get_node_or_null("/root/Main3D/ScoreManager")
+	
+	print("UI Labels - ScoreLabel:", score_label, " FoundWordsLabel:", found_words_label, " WordMeaningsLabel:", word_meanings_label)
 	
 	if score_manager:
 		score_manager.connect("score_changed", _on_score_changed)

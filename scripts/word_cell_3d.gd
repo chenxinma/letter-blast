@@ -5,7 +5,7 @@ extends Area3D
 
 const CELL_SIZE = 60
 const COLOR_HIGHLIGHT = Color(0.361, 0.486, 0.392, 1.0)
-const COLOR_HINT = Color(0.934, 0.837, 0.941, 1.0)
+const COLOR_HINT = Color(0.643, 0.349, 0.671, 0.5)
 const COLOR_USED = Color(0.5, 0.5, 0.5, 0.5)
 
 var letter: String = ""

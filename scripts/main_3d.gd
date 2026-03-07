@@ -14,7 +14,7 @@ var hint_manager: HintManager
 var camera_initial_position: Vector3
 var time_elapsed: float = 0.0
 var camera_sway_enabled: bool = true
-var sway_amplitude: float = 0.02
+var sway_amplitude: float = 0.005
 var sway_speed: float = 0.5
 
 func _ready() -> void:

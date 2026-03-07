@@ -1,11 +1,9 @@
 extends Node3D
 class_name GridManager3D
 
-signal grid_generated(grid_size: Vector2)
-
 @export var grid_width: int = 18
 @export var grid_height: int = 4
-@export var cell_spacing: float = 0.6
+@export var cell_spacing: float = 0.35
 
 var word_manager: WordManager
 var cell_template: PackedScene
@@ -63,7 +61,6 @@ func generate_grid() -> void:
 				
 				var c = get_random_letter()
 				cell_instance.set_letter(c, coord)
-				print("placed ", c)
 				cells[coord] = cell_instance
 
 func get_random_letter() -> String:
@@ -176,7 +173,8 @@ func do_place_word_by_path(word: String, path: Array[Vector2]) -> void:
 
 func clear_grid() -> void:
 	for child in get_children():
-		child.queue_free()
+		if child.name != "Backboard":
+			child.queue_free()
 	cells.clear()
 	selected_cells.clear()
 
