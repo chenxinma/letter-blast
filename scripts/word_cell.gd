@@ -5,6 +5,7 @@ extends Area2D
 
 const CELL_SIZE = 60
 const COLOR_HIGHLIGHT = Color(0.361, 0.486, 0.392, 1.0)
+const COLOR_HINT = Color(0.934, 0.837, 0.941, 1.0)
 const COLOR_USED = Color(0.5, 0.5, 0.5, 0.5)
 
 var letter: String = ""
@@ -48,6 +49,9 @@ func _setup_background() -> void:
 		_border_texture_cache = TextureGenerator.create_cell_border(Vector2(CELL_SIZE, CELL_SIZE))
 	cell_background.texture = _border_texture_cache
 	cell_background.modulate = Color(1, 1, 1, 1)
+	
+func set_hint() -> void:
+	cell_background.modulate = COLOR_HINT
 
 func set_letter(c: String, coord: Vector2) -> void:
 	letter = c
