@@ -47,7 +47,7 @@ func add_score(word: String, time_remaining: int = 0) -> int:
 		time_bonus = int(time_remaining * 0.5)
 		total_score += time_bonus
 		level_score += time_bonus
-	
+	#print(total_score)
 	emit_signal("score_changed", total_score)
 	return word_score + time_bonus
 

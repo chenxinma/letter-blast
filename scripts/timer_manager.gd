@@ -5,6 +5,7 @@ extends Node
 var time_remaining: int = 0
 var is_running: bool = false
 var time_limit: int = 120
+var waiting_to_start: bool = false
 
 signal time_changed(seconds: int)
 signal time_out()
@@ -16,8 +17,15 @@ func _ready() -> void:
 func start_timer(seconds: int) -> void:
 	time_limit = seconds
 	time_remaining = seconds
-	is_running = true
+	waiting_to_start = true
+	is_running = false
 	emit_signal("time_changed", time_remaining)
+
+
+func begin_timer() -> void:
+	if waiting_to_start:
+		waiting_to_start = false
+		is_running = true
 
 
 func stop_timer() -> void:

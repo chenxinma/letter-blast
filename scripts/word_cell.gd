@@ -48,7 +48,7 @@ func _setup_background() -> void:
 	if not _border_texture_cache:
 		_border_texture_cache = TextureGenerator.create_cell_border(Vector2(CELL_SIZE, CELL_SIZE))
 	cell_background.texture = _border_texture_cache
-	cell_background.modulate = Color(1, 1, 1, 1)
+	cell_background.modulate = Color(1.0, 1.0, 1.0, 0.5)
 	
 func set_hint() -> void:
 	cell_background.modulate = COLOR_HINT

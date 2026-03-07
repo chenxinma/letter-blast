@@ -25,7 +25,6 @@ func handle_mouse_motion(event: InputEventMouseMotion) -> void:
 
 
 func handle_mouse_release(event: InputEventMouseButton) -> void:
-	print("handle_mouse_release")
 	if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 		if selected_path.size() >= 2:
 			validate_word()
@@ -90,7 +89,6 @@ func clear_selection() -> void:
 			cell.set_highlighted(false)
 	selected_path.clear()
 	current_word = ""
-	print("clear_selection")
 
 
 func mouse_to_grid(mouse_pos: Vector2) -> Vector2:

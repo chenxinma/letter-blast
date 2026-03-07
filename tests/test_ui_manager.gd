@@ -16,18 +16,14 @@ func _test_update_ui_with_valid_manager() -> void:
 	var word_manager := WordManager.new()
 	word_manager.load_words()
 	
-	var word_count_label := Label.new()
 	var found_words_label := Label.new()
 	
-	ui_manager.add_child(word_count_label)
 	ui_manager.add_child(found_words_label)
-	ui_manager.word_count_label = word_count_label
 	ui_manager.found_words_label = found_words_label
 	ui_manager.word_manager = word_manager
 	
 	ui_manager.update_ui()
 	
-	assert(word_count_label.text.begins_with("Words left:"), "Should display word count")
 	assert(found_words_label.text.begins_with("Found:"), "Should display found words")
 	
 	ui_manager.queue_free()
@@ -36,18 +32,14 @@ func _test_update_ui_with_valid_manager() -> void:
 func _test_update_ui_null_check() -> void:
 	var ui_manager := UIManager.new()
 	
-	var word_count_label := Label.new()
 	var found_words_label := Label.new()
 	
-	ui_manager.add_child(word_count_label)
 	ui_manager.add_child(found_words_label)
-	ui_manager.word_count_label = word_count_label
 	ui_manager.found_words_label = found_words_label
 	ui_manager.word_manager = null
 	
 	ui_manager.update_ui()
 	
-	assert(word_count_label.text == "", "Should not crash with null word_manager")
 	assert(found_words_label.text == "", "Should not crash with null word_manager")
 	
 	ui_manager.queue_free()
@@ -69,12 +61,9 @@ func _test_integration_with_word_manager() -> void:
 	var word_manager := WordManager.new()
 	word_manager.load_words()
 	
-	var word_count_label := Label.new()
 	var found_words_label := Label.new()
 	
-	ui_manager.add_child(word_count_label)
 	ui_manager.add_child(found_words_label)
-	ui_manager.word_count_label = word_count_label
 	ui_manager.found_words_label = found_words_label
 	ui_manager.word_manager = word_manager
 	
@@ -83,7 +72,6 @@ func _test_integration_with_word_manager() -> void:
 	
 	ui_manager.update_ui()
 	
-	assert(word_count_label.text != "", "Word count should be set")
 	assert(found_words_label.text != "", "Found words should be set")
 	assert(found_words_label.text.find("APPLE") != -1, "Found words should include APPLE")
 	assert(found_words_label.text.find("BANANA") != -1, "Found words should include BANANA")

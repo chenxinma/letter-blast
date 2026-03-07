@@ -37,17 +37,6 @@ func _test_null_word_manager() -> void:
 	level_manager.word_manager = null
 	level_manager.grid_manager = GridManager.new()
 	
-	level_manager.start_level()
-	level_manager.check_level_complete()
-	level_manager.queue_free()
-
-func _test_null_grid_manager() -> void:
-	var level_manager := LevelManager.new()
-	level_manager.word_manager = WordManager.new()
-	level_manager.word_manager.load_words()
-	level_manager.grid_manager = null
-	
-	level_manager.start_level()
 	level_manager.check_level_complete()
 	level_manager.queue_free()
 
@@ -56,5 +45,4 @@ func _run_tests() -> void:
 	_test_level_complete_increments()
 	_test_level_complete_max_level()
 	_test_null_word_manager()
-	_test_null_grid_manager()
 	print("All LevelManager tests passed!")

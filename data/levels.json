@@ -2,93 +2,73 @@
   "levels": [
 	{
 	  "level": 1,
-	  "name": "Unit 1: Basic Fruits",
-	  "description": "简单的单词，帮助玩家熟悉机制",
+	  "name": "Unit 1: Basic",
+	  "description": "熟悉游戏机制",
 	  "word_count": 3,
-	  "assigned_words": ["APPLE", "KIWI", "LEMON"],
-	  "time_limit": 120,
-	  "unlock_condition": null
+	  "time_limit": 120
 	},
 	{
 	  "level": 2,
-	  "name": "Unit 2: Common Words",
-	  "description": "常见的水果单词",
+	  "name": "Unit 2: Common",
+	  "description": "常见单词",
 	  "word_count": 4,
-	  "assigned_words": ["BANANA", "DATE", "FIG", "GRAPES"],
-	  "time_limit": 150,
-	  "unlock_condition": {"level_1_passed": true}
+	  "time_limit": 150
 	},
 	{
 	  "level": 3,
-	  "name": "Unit 3: Medium Challenge",
-	  "description": "中等难度，单词长度增加",
+	  "name": "Unit 3: Medium",
+	  "description": "中等难度",
 	  "word_count": 5,
-	  "assigned_words": ["CHERRY", "HONEYDEW", "MANGO", "NECTARINE", "PAPAYA"],
-	  "time_limit": 180,
-	  "unlock_condition": {"level_2_passed": true}
+	  "time_limit": 180
 	},
 	{
 	  "level": 4,
-	  "name": "Unit 4: Extended vocabulary",
-	  "description": "更多单词，挑战开始",
+	  "name": "Unit 4: Extended",
+	  "description": "扩展词汇",
 	  "word_count": 5,
-	  "assigned_words": ["ELDERBERRY", "STRAWBERRY", "TANGERINE", "ULUBAR", "VANILLA"],
-	  "time_limit": 180,
-	  "unlock_condition": {"level_3_passed": true}
+	  "time_limit": 180
 	},
 	{
 	  "level": 5,
-	  "name": "Level 5: Challenge",
-	  "description": "混合难度单词",
+	  "name": "Unit 5: Challenge",
+	  "description": "挑战开始",
 	  "word_count": 6,
-	  "assigned_words": null,
-	  "time_limit": 210,
-	  "unlock_condition": {"level_4_passed": true}
+	  "time_limit": 210
 	},
 	{
 	  "level": 6,
-	  "name": "Level 6: Challenge",
-	  "description": "更多单词组合",
+	  "name": "Unit 6: Advanced",
+	  "description": "进阶挑战",
 	  "word_count": 6,
-	  "assigned_words": null,
-	  "time_limit": 210,
-	  "unlock_condition": {"level_5_passed": true}
+	  "time_limit": 210
 	},
 	{
 	  "level": 7,
-	  "name": "Level 7: Advanced",
-	  "description": "较长单词加入",
+	  "name": "Unit 7: Expert",
+	  "description": "专家级别",
 	  "word_count": 7,
-	  "assigned_words": null,
-	  "time_limit": 240,
-	  "unlock_condition": {"level_6_passed": true}
+	  "time_limit": 240
 	},
 	{
 	  "level": 8,
-	  "name": "Level 8: Advanced",
-	  "description": "挑战更长单词",
+	  "name": "Unit 8: Master",
+	  "description": "大师级别",
 	  "word_count": 8,
-	  "assigned_words": null,
-	  "time_limit": 240,
-	  "unlock_condition": {"level_7_passed": true}
+	  "time_limit": 240
 	},
 	{
 	  "level": 9,
-	  "name": "Level 9: Expert",
-	  "description": "专家级别挑战",
+	  "name": "Unit 9: Grandmaster",
+	  "description": "宗师级别",
 	  "word_count": 9,
-	  "assigned_words": null,
-	  "time_limit": 270,
-	  "unlock_condition": {"level_8_passed": true}
+	  "time_limit": 270
 	},
 	{
 	  "level": 10,
-	  "name": "Level 10: Expert",
-	  "description": "专家级别终极挑战",
+	  "name": "Unit 10: Legend",
+	  "description": "传说级别",
 	  "word_count": 10,
-	  "assigned_words": null,
-	  "time_limit": 300,
-	  "unlock_condition": {"level_9_passed": true}
+	  "time_limit": 300
 	}
   ]
 }

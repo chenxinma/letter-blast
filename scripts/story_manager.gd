@@ -79,28 +79,11 @@ func pass_level(level_num: int) -> void:
 		if can_unlock_level(next_level):
 			unlock_level(next_level)
 		level_progress[level_num] = {"passed": true, "timestamp": Time.get_unix_time_from_system()}
-
-
-func get_level_time_limit(level_num: int) -> int:
-	var config = get_level_config(level_num)
-	return config.get("time_limit", 120)
-
-
-func get_level_word_count(level_num: int) -> int:
-	var config = get_level_config(level_num)
-	return config.get("word_count", 5)
-
-
-func get_level_words(level_num: int) -> Array:
-	var config = get_level_config(level_num)
-	var assigned = config.get("assigned_words")
-	if assigned:
-		return assigned
-	return []
+		save_progress()
 
 
 func load_progress() -> void:
-	var save_file = FileAccess.open("res://user://save_data.json", FileAccess.READ)
+	var save_file = FileAccess.open("user://story_progress.json", FileAccess.READ)
 	if not save_file:
 		print("StoryManager: No save data found")
 		return
@@ -119,7 +102,7 @@ func load_progress() -> void:
 
 
 func save_progress() -> void:
-	var save_file := FileAccess.open("res://user://save_data.json", FileAccess.WRITE)
+	var save_file := FileAccess.open("user://story_progress.json", FileAccess.WRITE)
 	if not save_file:
 		print("ERROR: Failed to save progress")
 		return

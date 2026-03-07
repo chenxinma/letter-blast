@@ -12,47 +12,28 @@ script = ExtResource("1_main")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=630496416]
 
-[node name="LevelLabel" type="Label" parent="UI" unique_id=1000000001]
-offset_left = 25.0
-offset_top = 16.0
-offset_right = 150.0
-offset_bottom = 36.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 20
-
 [node name="ScoreLabel" type="Label" parent="UI" unique_id=1000000002]
-offset_left = 300.0
-offset_top = 16.0
-offset_right = 450.0
-offset_bottom = 36.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 20
-
-[node name="TimeLabel" type="Label" parent="UI" unique_id=1000000003]
-offset_left = 500.0
-offset_top = 16.0
-offset_right = 650.0
-offset_bottom = 36.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 20
-
-[node name="WordCountLabel" type="Label" parent="UI" unique_id=405665522]
-anchors_preset = -1
-anchor_right = 0.18315972
-anchor_bottom = 0.10030864
 offset_left = 26.0
-offset_top = 553.0
-offset_right = 26.0
-offset_bottom = 553.0
+offset_top = 19.0
+offset_right = 208.0
+offset_bottom = 47.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 20
-metadata/_edit_use_anchors_ = true
 
 [node name="FoundWordsLabel" type="Label" parent="UI" unique_id=2026540226]
 offset_left = 36.0
 offset_top = 477.0
 offset_right = 76.0
 offset_bottom = 500.0
+
+[node name="WordMeaningsLabel" type="Label" parent="UI" unique_id=-1294967295]
+offset_left = 831.0
+offset_top = 418.0
+offset_right = 1131.0
+offset_bottom = 768.0
+theme_override_colors/font_color = Color(0.9, 0.9, 0.7, 1)
+theme_override_font_sizes/font_size = 18
+autowrap_mode = 2
 
 [node name="UIManager" type="CanvasLayer" parent="." unique_id=2007601286]
 script = ExtResource("2_ui")

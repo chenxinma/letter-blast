@@ -55,8 +55,8 @@ func generate_grid() -> void:
 		cells.append(row_array)
 	
 	var assigned_words: Array = []
-	if word_manager.has_method("get_assigned_words"):
-		assigned_words = word_manager.get_assigned_words()
+	if word_manager and "level_words" in word_manager:
+		assigned_words = word_manager.level_words
 	
 	if cell_template == null:
 		print("ERROR: cell_template is null")
@@ -178,6 +178,8 @@ func do_place_word_by_path(word: String, path: Array[Vector2]) -> void:
 			cell.set_letter(word[i], coord)
 			cell.set_hint()
 			cells[coord.y][coord.x] = cell
+		else:
+			print("duplicate", coord)
 
 func mark_cells_as_used(coordinates: Array) -> void:
 	for coord in coordinates:

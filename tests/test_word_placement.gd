@@ -14,7 +14,7 @@ func _test_no_self_intersect() -> void:
 	var grid_manager := _create_test_grid_manager()
 	
 	grid_manager.place_word_in_grid("HELLO")
-	var path: Array = grid_manager.placed_paths.get("HELLO", [])
+	var path: Variant = grid_manager.placed_paths.get("HELLO", [])
 	
 	assert(path.size() == 5, "HELLO path should have 5 coordinates")
 	
@@ -46,8 +46,8 @@ func _test_letter_sharing() -> void:
 	assert(grid_manager.placed_paths.has("CAT"), "CAT should be placed")
 	assert(grid_manager.placed_paths.has("BAT"), "BAT should be placed")
 	
-	var cat_path: Array = grid_manager.placed_paths["CAT"]
-	var bat_path: Array = grid_manager.placed_paths["BAT"]
+	var cat_path: Variant = grid_manager.placed_paths["CAT"]
+	var bat_path: Variant = grid_manager.placed_paths["BAT"]
 	
 	var shared_coords: int = 0
 	for coord in cat_path:
@@ -138,7 +138,7 @@ func _test_path_directions_valid() -> void:
 	var grid_manager := _create_test_grid_manager()
 	
 	grid_manager.place_word_in_grid("HELLO")
-	var path: Array = grid_manager.placed_paths.get("HELLO", [])
+	var path: Variant = grid_manager.placed_paths.get("HELLO", [])
 	
 	assert(path.size() >= 2, "Path should have at least 2 coordinates")
 	
