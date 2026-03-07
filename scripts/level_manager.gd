@@ -5,7 +5,7 @@ extends Node
 const MAX_LEVELS: int = 100
 
 @export var word_manager: WordManager
-@export var grid_manager: GridManager
+@export var grid_manager: Node
 
 var current_level: int = 1
 

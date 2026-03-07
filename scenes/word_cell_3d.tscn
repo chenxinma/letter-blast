@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://wordcell3d"]
+
+[ext_resource type="Script" path="res://scripts/word_cell_3d.gd" id="1_cell"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[node name="WordCell3D" type="Area3D"]
+script = ExtResource("1_cell")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+pixel_size = 0.005
+billboard = 1
+texture_filter = 0
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0.1)
+pixel_size = 0.01
+billboard = 1
+text = "A"
+font_size = 64

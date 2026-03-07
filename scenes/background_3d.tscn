@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://background3d"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1"]
+size = Vector2(20, 30)
+
+[node name="Background3D" type="Node3D"]
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 30, 0, -1, 0)
+mesh = SubResource("PlaneMesh_1")
+
+[node name="Background" type="Sprite3D" parent="."]
+transform = Transform3D(30, 0, 0, 0, 20, 0, 0, 0, 1, 0, 10, -15)
+pixel_size = 0.01
+billboard = 0
+texture_filter = 0
