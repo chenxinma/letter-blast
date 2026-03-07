@@ -3,7 +3,7 @@ class_name GridManager3D
 
 @export var grid_width: int = 18
 @export var grid_height: int = 4
-@export var cell_spacing: float = 1.0
+@export var cell_spacing: float = 0.6
 
 var word_manager: WordManager
 var cell_template: PackedScene
