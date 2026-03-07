@@ -1,6 +1,8 @@
 extends Node3D
 class_name GridManager3D
 
+signal grid_generated(grid_size: Vector2)
+
 @export var grid_width: int = 18
 @export var grid_height: int = 4
 @export var cell_spacing: float = 0.6
@@ -59,7 +61,9 @@ func generate_grid() -> void:
 				var pos_y = (grid_height / 2.0 - row - 0.5) * CELL_SIZE_3D * cell_spacing
 				cell_instance.position = Vector3(pos_x, pos_y, 0)
 				
-				cell_instance.set_letter(get_random_letter(), coord)
+				var c = get_random_letter()
+				cell_instance.set_letter(c, coord)
+				print("placed ", c)
 				cells[coord] = cell_instance
 
 func get_random_letter() -> String:
