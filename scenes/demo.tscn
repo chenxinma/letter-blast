@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://1tk0fjv0k5a4"]
+
+[ext_resource type="Shader" uid="uid://cij7ccwtoxnwy" path="res://shaders/outline_3d.gdshader" id="1_tqfh0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ba4lm"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l20p6"]
+render_priority = 0
+shader = ExtResource("1_tqfh0")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 0.010000000475
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vephn"]
+next_pass = SubResource("ShaderMaterial_l20p6")
+
+[node name="Demo" type="Node3D" unique_id=682715310]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1690184547]
+mesh = SubResource("BoxMesh_ba4lm")
+surface_material_override/0 = SubResource("StandardMaterial3D_vephn")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2122233129]
+transform = Transform3D(0.7071067, -0.18301277, -0.6830128, -0.35355332, 0.74501, -0.5656503, 0.61237246, 0.6414566, 0.46209675, -2, -1, 1)
+fov = 34.751793
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1946779886]
+transform = Transform3D(1, 0, 0, 0, 0.14154053, 0.9899325, 0, -0.9899325, 0.14154053, 0, 2, 1)
+
+[node name="FillLight" type="DirectionalLight3D" parent="." unique_id=456088358]
+transform = Transform3D(-0.50000024, 0.28204665, -0.8188098, 0, 0.9454802, 0.3256795, 0.86602527, 0.16283982, -0.47274038, -2.5735693, 7.230791, -3.2284641)
+light_energy = 0.4
