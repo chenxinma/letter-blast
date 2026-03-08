@@ -211,7 +211,7 @@ func mark_used(word_coords: Array) -> void:
 	for coord in word_coords:
 		var cell = get_cell_at(coord)
 		if cell:
-			cell.set_used(true)
+			cell.set_used()
 
 func is_valid_coordinate(coord: Vector2) -> bool:
 	return coord.x >= 0 and coord.x < grid_width and coord.y >= 0 and coord.y < grid_height

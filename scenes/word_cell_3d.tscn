@@ -1,25 +1,22 @@
 [gd_scene format=3 uid="uid://wordcell3d"]
 
 [ext_resource type="Script" uid="uid://bwyiwrdglp17j" path="res://scripts/word_cell_3d.gd" id="1_cell"]
+[ext_resource type="ArrayMesh" uid="uid://ba2wy12efqgwl" path="res://assets/box.obj" id="2_8ybgw"]
 [ext_resource type="Shader" uid="uid://cij7ccwtoxnwy" path="res://shaders/outline_3d.gdshader" id="2_mrgwo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1"]
 size = Vector3(0.3, 0.3, 0.1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_1"]
-size = Vector3(0.28, 0.28, 0.05)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mrgwo"]
 render_priority = 0
 shader = ExtResource("2_mrgwo")
 shader_parameter/outline_color = Color(0.72156864, 0.5254902, 0.043137256, 1)
-shader_parameter/outline_width = 0.0050000002375
+shader_parameter/outline_width = 0.0310000014725
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ybgw"]
 next_pass = SubResource("ShaderMaterial_mrgwo")
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0.9411765, 0.9019608, 0.54901963, 1)
 roughness = 0.01
 
 [node name="WordCell3D" type="Area3D" unique_id=1067844105]
@@ -30,9 +27,9 @@ script = ExtResource("1_cell")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=322609765]
 shape = SubResource("BoxShape3D_1")
 
-[node name="Button" type="MeshInstance3D" parent="." unique_id=1969702281]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.03)
-mesh = SubResource("BoxMesh_1")
+[node name="Box" type="MeshInstance3D" parent="." unique_id=1969702281]
+transform = Transform3D(0.31, 0, 0, 0, -1.35505305e-08, -0.31, 0, 0.31, -1.35505305e-08, 0, 0, -0.0370031)
+mesh = ExtResource("2_8ybgw")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ybgw")
 
 [node name="LetterLabel" type="Label3D" parent="." unique_id=272922827]
@@ -40,6 +37,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.06)
 pixel_size = 0.008
 texture_filter = 0
 modulate = Color(0.36078432, 0.2509804, 0.2, 1)
-outline_modulate = Color(1, 0.84313726, 0, 1)
 text = "A"
-outline_size = 1
+outline_size = 0
