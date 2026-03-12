@@ -1,0 +1,6 @@
+[gd_resource type="CurveTexture" format=3 uid="uid://bd1bqodrktgh4"]
+
+[ext_resource type="Curve" path="res://resources/glow_rain_scale_curve.tres" id="1_curve"]
+
+[resource]
+curve = ExtResource("1_curve")

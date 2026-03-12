@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://wordcell2d"]
+
+[ext_resource type="Script" uid="uid://568upgrxp8co" path="res://scripts/word_cell_2d.gd" id="1_cell"]
+[ext_resource type="Texture2D" uid="uid://covp5a2b3dptc" path="res://assets/box.png" id="2_box"]
+[ext_resource type="Texture2D" uid="uid://dsrsb1tclrymf" path="res://assets/letters.png" id="3_letters"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(70, 75)
+
+[node name="WordCell2D" type="Area2D" unique_id=833951368]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_cell")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=902431277]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="BoxSprite" type="Sprite2D" parent="." unique_id=1531472972]
+texture = ExtResource("2_box")
+region_enabled = true
+region_rect = Rect2(0, 0, 70, 75)
+
+[node name="LetterSprite" type="Sprite2D" parent="." unique_id=2108236918]
+scale = Vector2(0.73, 0.78)
+texture = ExtResource("3_letters")
+offset = Vector2(0, -11)
+region_enabled = true
+region_rect = Rect2(0, 0, 96, 96)

@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Letter-Blast"
-run/main_scene="uid://main3d"
+run/main_scene="uid://startscreen"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GlobalWordManager="*res://scripts/global_word_manager.gd"
 
 [importer]
 
@@ -29,3 +33,4 @@ textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+viewport/hdr_2d=true

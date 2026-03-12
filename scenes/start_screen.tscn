@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://startscreen"]
+
+[ext_resource type="Texture2D" uid="uid://bkt23ha7j8a4u" path="res://assets/start_background.png" id="1_bg"]
+[ext_resource type="Script" uid="uid://bdiw0tdkmcoyc" path="res://scripts/start_screen.gd" id="2_script"]
+[ext_resource type="Texture2D" uid="uid://buref01bg0kxb" path="res://assets/title.png" id="3_he1sj"]
+[ext_resource type="Texture2D" path="res://assets/Play.png" id="4_play"]
+[ext_resource type="Material" uid="uid://glowrainmat" path="res://resources/glow_rain_process_material.tres" id="5_particlemat"]
+[ext_resource type="Environment" uid="uid://bbaym4xccop48" path="res://resources/start_screen_environment.tres" id="6_env"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_normal"]
+atlas = ExtResource("4_play")
+region = Rect2(0, 0, 180, 75)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pressed"]
+atlas = ExtResource("4_play")
+region = Rect2(0, 75, 180, 75)
+
+[node name="StartScreen" type="Control" unique_id=2077932783]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_script")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1949006130]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_bg")
+expand_mode = 3
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=175652186]
+environment = ExtResource("6_env")
+
+[node name="GlowRain" type="GPUParticles2D" parent="." unique_id=490860144]
+self_modulate = Color(0.99607843, 0.9843137, 0.8745098, 1)
+position = Vector2(520, 104.000015)
+rotation = 0.55994064
+amount = 35
+amount_ratio = 0.5563
+lifetime = 8.0
+randomness = 0.4
+process_material = ExtResource("5_particlemat")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=123977647]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = 44.0
+offset_right = 96.0
+offset_bottom = 164.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="PlayButton" type="TextureButton" parent="VBoxContainer" unique_id=1477649048]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = SubResource("AtlasTexture_normal")
+texture_pressed = SubResource("AtlasTexture_pressed")
+
+[node name="LoadButton" type="Button" parent="VBoxContainer" unique_id=342252676]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.36, 0.25, 0.2, 1)
+theme_override_colors/font_outline_color = Color(1, 0.84, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 28
+text = "Load Words"
+
+[node name="StatusLabel" type="Label" parent="." unique_id=836473980]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.2, 0.8, 0.2, 1)
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FileDialog" type="FileDialog" parent="." unique_id=237257021]
+title = "选择词库文件"
+access = 2
+filters = PackedStringArray("*.json ; JSON Files")
+
+[node name="Title" type="TextureRect" parent="." unique_id=1169888577]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -264.0
+offset_top = 112.0
+offset_right = 274.0
+offset_bottom = 230.0
+grow_horizontal = 2
+texture = ExtResource("3_he1sj")
+stretch_mode = 2

@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://main2d"]
+
+[ext_resource type="Script" uid="uid://ykdeujx40pjq" path="res://scripts/main_2d.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://cup5xkg5clu5v" path="res://scripts/ui_manager.gd" id="2_ui"]
+[ext_resource type="Script" uid="uid://bxm3ick3a0lwp" path="res://scripts/level_manager.gd" id="3_level"]
+[ext_resource type="Script" uid="uid://3tx0d01xcrjh" path="res://scripts/input_handler_2d.gd" id="4_input"]
+[ext_resource type="Script" uid="uid://cbijeprt2bfdt" path="res://scripts/grid_manager_2d.gd" id="5_grid"]
+[ext_resource type="Script" uid="uid://dknvoy2pml5j0" path="res://scripts/word_manager.gd" id="6_word"]
+[ext_resource type="Texture2D" uid="uid://bq17tca6r3hbo" path="res://assets/background.png" id="8_bg"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_4bxcq"]
+size = Vector2(1050, 300)
+
+[node name="Main2D" type="Node2D" unique_id=368357379]
+script = ExtResource("1_main")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=750721584]
+position = Vector2(576, 324)
+scale = Vector2(0.41860467, 0.421875)
+texture = ExtResource("8_bg")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1728387783]
+position = Vector2(576, 324)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1015610274]
+
+[node name="ScoreLabel" type="Label" parent="UI" unique_id=467775191]
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 206.0
+offset_bottom = 44.0
+theme_override_colors/font_color = Color(0.36078432, 0.2509804, 0.2, 1)
+theme_override_colors/font_outline_color = Color(1, 0.84313726, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 20
+
+[node name="FoundWordsLabel" type="Label" parent="UI" unique_id=775443192]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -280.0
+offset_top = -48.0
+offset_right = -16.0
+offset_bottom = -18.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.36078432, 0.2509804, 0.2, 1)
+
+[node name="WordMeaningsLabel" type="Label" parent="UI" unique_id=211751779]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -240.0
+offset_right = 332.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.36078432, 0.2509804, 0.2, 1)
+theme_override_colors/font_outline_color = Color(1, 0.84313726, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 24
+vertical_alignment = 2
+autowrap_mode = 2
+
+[node name="UIManager" type="CanvasLayer" parent="." unique_id=1846212995]
+script = ExtResource("2_ui")
+
+[node name="LevelManager" type="Node" parent="." unique_id=1124646814]
+script = ExtResource("3_level")
+
+[node name="InputHandler2D" type="Node" parent="." unique_id=104363505]
+script = ExtResource("4_input")
+
+[node name="WordManager" type="Node" parent="." unique_id=574414867]
+script = ExtResource("6_word")
+
+[node name="GridManager2D" type="Node2D" parent="." unique_id=683932957]
+position = Vector2(576, 296)
+script = ExtResource("5_grid")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="GridManager2D" unique_id=1990526204]
+mesh = SubResource("QuadMesh_4bxcq")

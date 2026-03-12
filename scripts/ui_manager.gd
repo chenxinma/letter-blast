@@ -17,11 +17,23 @@ signal countdown_finished()
 
 func _ready() -> void:
 	score_label = get_node_or_null("/root/Main3D/UI/ScoreLabel")
+	if not score_label:
+		score_label = get_node_or_null("/root/Main2D/UI/ScoreLabel")
 	found_words_label = get_node_or_null("/root/Main3D/UI/FoundWordsLabel")
+	if not found_words_label:
+		found_words_label = get_node_or_null("/root/Main2D/UI/FoundWordsLabel")
 	word_meanings_label = get_node_or_null("/root/Main3D/UI/WordMeaningsLabel")
+	if not word_meanings_label:
+		word_meanings_label = get_node_or_null("/root/Main2D/UI/WordMeaningsLabel")
 	word_manager = get_node_or_null("/root/Main3D/WordManager")
+	if not word_manager:
+		word_manager = get_node_or_null("/root/Main2D/WordManager")
 	timer_manager = get_node_or_null("/root/Main3D/TimerManager")
+	if not timer_manager:
+		timer_manager = get_node_or_null("/root/Main2D/TimerManager")
 	score_manager = get_node_or_null("/root/Main3D/ScoreManager")
+	if not score_manager:
+		score_manager = get_node_or_null("/root/Main2D/ScoreManager")
 	
 	print("UI Labels - ScoreLabel:", score_label, " FoundWordsLabel:", found_words_label, " WordMeaningsLabel:", word_meanings_label)
 	

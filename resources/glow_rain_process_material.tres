@@ -1,0 +1,18 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://glowrainmat"]
+
+[ext_resource type="Texture2D" path="res://resources/glow_rain_scale_curve_texture.tres" id="1_curve"]
+
+[resource]
+lifetime_randomness = 1.0
+emission_shape = 3
+emission_box_extents = Vector3(580, 10, 1)
+direction = Vector3(0, 1, 0)
+spread = 8.0
+initial_velocity_min = 10.0
+initial_velocity_max = 25.0
+gravity = Vector3(0, 15, 0)
+damping_min = 1.0
+damping_max = 2.0
+scale_max = 4.0
+scale_curve = ExtResource("1_curve")
+color = Color(0.99607843, 0.9843137, 0.8745098, 1)

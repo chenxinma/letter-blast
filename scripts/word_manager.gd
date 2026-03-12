@@ -18,7 +18,17 @@ signal progress_saved
 
 func _ready() -> void:
 	level_manager = get_node_or_null("../LevelManager")
-	load_words()
+	
+	if GlobalWordManager.has_custom_words:
+		words = GlobalWordManager.get_words().duplicate()
+		word_meanings = GlobalWordManager.get_word_meanings().duplicate()
+		for word in words:
+			if not word_boxes.has(word):
+				word_boxes[word] = 1
+		print("WordManager: Using custom words, count: ", words.size())
+	else:
+		load_words()
+	
 	load_progress()
 
 
@@ -31,6 +41,26 @@ func load_words() -> bool:
 	var content := file.get_as_text()
 	file.close()
 	
+	return parse_words_json(content)
+
+
+func load_words_from_file(path: String) -> bool:
+	var file := FileAccess.open(path, FileAccess.READ)
+	if not file:
+		print("ERROR: Failed to open file: ", path)
+		return false
+	
+	var content := file.get_as_text()
+	file.close()
+	
+	words.clear()
+	word_meanings.clear()
+	word_boxes.clear()
+	
+	return parse_words_json(content)
+
+
+func parse_words_json(content: String) -> bool:
 	var json = JSON.new()
 	var error = json.parse(content)
 	if error == OK:
