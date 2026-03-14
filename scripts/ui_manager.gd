@@ -5,7 +5,9 @@ extends CanvasLayer
 var score_label: Label
 var found_words_label: Label
 var word_meanings_label: Label
-var word_manager: WordManager
+var box_stats_label: Label
+var timer_label: Label
+var leitner_manager: Node
 var timer_manager: TimerManager
 var score_manager: ScoreManager
 
@@ -15,32 +17,30 @@ var word_score_display_time: float = 0.0
 
 signal countdown_finished()
 
+
 func _ready() -> void:
-	score_label = get_node_or_null("/root/Main3D/UI/ScoreLabel")
-	if not score_label:
-		score_label = get_node_or_null("/root/Main2D/UI/ScoreLabel")
-	found_words_label = get_node_or_null("/root/Main3D/UI/FoundWordsLabel")
-	if not found_words_label:
-		found_words_label = get_node_or_null("/root/Main2D/UI/FoundWordsLabel")
-	word_meanings_label = get_node_or_null("/root/Main3D/UI/WordMeaningsLabel")
-	if not word_meanings_label:
-		word_meanings_label = get_node_or_null("/root/Main2D/UI/WordMeaningsLabel")
-	word_manager = get_node_or_null("/root/Main3D/WordManager")
-	if not word_manager:
-		word_manager = get_node_or_null("/root/Main2D/WordManager")
-	timer_manager = get_node_or_null("/root/Main3D/TimerManager")
-	if not timer_manager:
-		timer_manager = get_node_or_null("/root/Main2D/TimerManager")
-	score_manager = get_node_or_null("/root/Main3D/ScoreManager")
-	if not score_manager:
-		score_manager = get_node_or_null("/root/Main2D/ScoreManager")
-	
-	print("UI Labels - ScoreLabel:", score_label, " FoundWordsLabel:", found_words_label, " WordMeaningsLabel:", word_meanings_label)
-	
+	_find_nodes()
 	if score_manager:
 		score_manager.connect("score_changed", _on_score_changed)
 	
 	update_ui()
+
+
+func _find_nodes() -> void:
+	if not score_label:
+		score_label = get_node_or_null("/root/Main2D/UI/ScoreLabel")
+	
+	if not found_words_label:
+		found_words_label = get_node_or_null("/root/Main2D/UI/FoundWordsLabel")
+	
+	if not word_meanings_label:
+		word_meanings_label = get_node_or_null("/root/Main2D/Hint/WordMeaningsLabel")
+	
+	if not box_stats_label:
+		box_stats_label = get_node_or_null("/root/Main2D/UI/BoxStatsLabel")
+	
+	if not timer_label:
+		timer_label = get_node_or_null("/root/Main2D/UI/TimerLabel")
 
 
 func _process(delta: float) -> void:
@@ -54,6 +54,17 @@ func _process(delta: float) -> void:
 	
 	if word_score_display_time > 0:
 		word_score_display_time -= delta
+	
+	_update_timer_display()
+
+
+func _update_timer_display() -> void:
+	if timer_label and timer_manager:
+		var time_left: int = timer_manager.time_remaining
+		@warning_ignore("integer_division")
+		var minutes: int = time_left / 60
+		var seconds: int = time_left % 60
+		timer_label.text = "%d:%02d" % [minutes, seconds]
 
 
 func update_ui() -> void:
@@ -63,8 +74,8 @@ func update_ui() -> void:
 	var score = 0
 	var found_words = []
 
-	if word_manager:
-		found_words = word_manager.get_found_words()
+	if leitner_manager:
+		found_words = leitner_manager.get_found_words()
 
 	if score_manager:
 		score = score_manager.total_score
@@ -73,28 +84,43 @@ func update_ui() -> void:
 	found_words_label.text = "Found: " + ", ".join(found_words)
 	
 	_update_word_meanings()
+	_update_box_stats()
 
 
 func _update_word_meanings() -> void:
-	if not word_meanings_label or not word_manager:
+	if not word_meanings_label or not leitner_manager:
 		return
 	
-	var words_info = word_manager.get_level_words_info()
+	var words_info = leitner_manager.get_current_game_words_info()
 	if words_info.is_empty():
 		word_meanings_label.text = ""
 		return
 	
-	var display_text = "本关单词:\n"
+	var display_text = "本局单词:\n"
+	var ln = ""
 	for word_info in words_info:
 		var en = word_info.get("en", "")
 		var zh = word_info.get("zh", "")
-		var found = word_manager.is_word_found(en)
+		var found = leitner_manager.is_word_found(en)
 		if found:
-			display_text += "[✓] %s - %s\n" % [en, zh]
+			display_text += "%s[✓] %s - %s" % [ln, en, zh]
 		else:
-			display_text += "[ ] %s - %s\n" % [en, zh]
+			display_text += "%s[ ] %s - %s" % [ln, en, zh]
+		ln = "\n"
 	
 	word_meanings_label.text = display_text
+
+
+func _update_box_stats() -> void:
+	if not box_stats_label or not leitner_manager:
+		return
+	
+	var stats = leitner_manager.get_box_stats()
+	var text = "学习进度: "
+	for i in range(1, 6):
+		text += "Box%d(%d) " % [i, stats.get(i, 0)]
+	
+	box_stats_label.text = text
 
 
 func update_score(score: int) -> void:
@@ -103,7 +129,6 @@ func update_score(score: int) -> void:
 
 
 func _on_score_changed(new_score: int) -> void:
-	print("_on_score_changed", new_score)
 	update_score(new_score)
 
 
@@ -119,10 +144,11 @@ func _update_countdown_display() -> void:
 		if word_score_display_time > 0:
 			score_label.text = "Score: %d (+%d)" % [score_manager.total_score if score_manager else 0, _last_word_score]
 		else:
-			score_label.text = "Score: %d (%.1fs)" % [score_manager.total_score if score_manager else 0, countdown_time]
+			score_label.text = "Score: %d" % [score_manager.total_score if score_manager else 0]
 
 
 var _last_word_score: int = 0
+
 
 func show_word_score(word_score: int) -> void:
 	_last_word_score = word_score

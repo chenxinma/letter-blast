@@ -11,14 +11,10 @@ var word_boxes: Dictionary = {}
 var found_words: Dictionary = {}
 var level_words: Array = []
 
-var level_manager: Node
-
 signal progress_saved
 
 
 func _ready() -> void:
-	level_manager = get_node_or_null("../LevelManager")
-	
 	if GlobalWordManager.has_custom_words:
 		words = GlobalWordManager.get_words().duplicate()
 		word_meanings = GlobalWordManager.get_word_meanings().duplicate()
@@ -136,8 +132,6 @@ func mark_as_found(word: String) -> void:
 	if not found_words.has(uppercase_word):
 		found_words[uppercase_word] = true
 		print("WordManager: Found word: ", uppercase_word)
-		if level_manager and level_manager.has_method("check_level_complete"):
-			level_manager.check_level_complete()
 
 
 func is_word_found(word: String) -> bool:

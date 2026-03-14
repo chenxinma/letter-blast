@@ -2,6 +2,7 @@ extends Area2D
 
 @onready var box_sprite: Sprite2D = $BoxSprite
 @onready var letter_sprite: Sprite2D = $LetterSprite
+@onready var click_player: AudioStreamPlayer = $ClickPlayer
 
 const BOX_WIDTH := 70
 const BOX_HEIGHT := 75
@@ -16,7 +17,7 @@ var _color_row: int = 0
 func set_letter(c: String, coord: Vector2) -> void:
 	letter = c
 	coordinate = coord
-	_color_row = randi() % 2
+	_color_row = randi() % 3
 	_update_sprites()
 
 func _update_sprites() -> void:
@@ -55,6 +56,8 @@ func set_highlighted(highlighted: bool) -> void:
 	if letter_sprite:
 		if is_highlighted:
 			letter_sprite.position.y -= 5
+			if click_player:
+				click_player.play()
 		else:
 			letter_sprite.position.y += 5
 	_update_sprites()

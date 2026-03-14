@@ -3,9 +3,10 @@ extends Node
 signal word_validated(word: String, is_valid: bool)
 
 var grid_manager: Node
-var word_manager: WordManager
+var leitner_manager: Node
 var selected_path: Array[Vector2] = []
 var current_word: String = ""
+
 
 func handle_mouse_press(event: InputEvent) -> void:
 	if event.button_index != MOUSE_BUTTON_LEFT or not event.pressed:
@@ -17,6 +18,7 @@ func handle_mouse_press(event: InputEvent) -> void:
 	if cell:
 		select_cell(cell.coordinate)
 
+
 func handle_mouse_release(event: InputEvent) -> void:
 	if event.button_index != MOUSE_BUTTON_LEFT or event.pressed:
 		return
@@ -25,6 +27,7 @@ func handle_mouse_release(event: InputEvent) -> void:
 		validate_word()
 	else:
 		clear_selection()
+
 
 func handle_mouse_motion(event: InputEvent) -> void:
 	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) or selected_path.is_empty():
@@ -35,6 +38,7 @@ func handle_mouse_motion(event: InputEvent) -> void:
 	
 	if cell:
 		select_cell(cell.coordinate)
+
 
 func _get_cell_under_mouse(mouse_pos: Vector2) -> Node:
 	if not grid_manager:
@@ -51,6 +55,7 @@ func _get_cell_under_mouse(mouse_pos: Vector2) -> Node:
 				if rect.has_point(mouse_pos):
 					return cell
 	return null
+
 
 func select_cell(coord: Vector2) -> void:
 	if not grid_manager.is_valid_coordinate(coord):
@@ -70,6 +75,7 @@ func select_cell(coord: Vector2) -> void:
 	
 	_update_current_word()
 
+
 func _is_adjacent_to_last(coord: Vector2) -> bool:
 	if selected_path.is_empty():
 		return false
@@ -80,6 +86,7 @@ func _is_adjacent_to_last(coord: Vector2) -> bool:
 	
 	return (dx == 1 and dy == 0) or (dx == 0 and dy == 1) or (dx == 1 and dy == 1)
 
+
 func _update_current_word() -> void:
 	current_word = ""
 	for coord in selected_path:
@@ -87,16 +94,18 @@ func _update_current_word() -> void:
 		if cell != null:
 			current_word += cell.letter
 
+
 func validate_word() -> void:
 	if current_word.length() >= 2:
-		if word_manager.is_valid_word(current_word):
+		if leitner_manager and leitner_manager.is_game_word(current_word):
 			grid_manager.mark_used(selected_path)
-			word_manager.mark_as_found(current_word)
+			leitner_manager.mark_word_found(current_word)
 			emit_signal("word_validated", current_word, true)
 		else:
 			emit_signal("word_validated", current_word, false)
 	
 	clear_selection()
+
 
 func clear_selection() -> void:
 	for coord in selected_path:

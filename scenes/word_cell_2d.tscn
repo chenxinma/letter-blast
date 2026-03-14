@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://568upgrxp8co" path="res://scripts/word_cell_2d.gd" id="1_cell"]
 [ext_resource type="Texture2D" uid="uid://covp5a2b3dptc" path="res://assets/box.png" id="2_box"]
 [ext_resource type="Texture2D" uid="uid://dsrsb1tclrymf" path="res://assets/letters.png" id="3_letters"]
+[ext_resource type="AudioStream" path="res://assets/click.mp3" id="4_click"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
 size = Vector2(70, 75)
@@ -26,3 +27,6 @@ texture = ExtResource("3_letters")
 offset = Vector2(0, -11)
 region_enabled = true
 region_rect = Rect2(0, 0, 96, 96)
+
+[node name="ClickPlayer" type="AudioStreamPlayer" parent="." unique_id=888777666]
+stream = ExtResource("4_click")

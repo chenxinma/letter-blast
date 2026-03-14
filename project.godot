@@ -18,6 +18,12 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalWordManager="*res://scripts/global_word_manager.gd"
+SceneManager="*uid://2iy8wfgenjka"
+Scenes="*uid://larj2tqblw3f"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/scene_manager/plugin.cfg")
 
 [importer]
 

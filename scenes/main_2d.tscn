@@ -2,11 +2,13 @@
 
 [ext_resource type="Script" uid="uid://ykdeujx40pjq" path="res://scripts/main_2d.gd" id="1_main"]
 [ext_resource type="Script" uid="uid://cup5xkg5clu5v" path="res://scripts/ui_manager.gd" id="2_ui"]
-[ext_resource type="Script" uid="uid://bxm3ick3a0lwp" path="res://scripts/level_manager.gd" id="3_level"]
+[ext_resource type="Texture2D" uid="uid://bp7qgweevdqvu" path="res://assets/close.svg" id="3_8rt3n"]
 [ext_resource type="Script" uid="uid://3tx0d01xcrjh" path="res://scripts/input_handler_2d.gd" id="4_input"]
 [ext_resource type="Script" uid="uid://cbijeprt2bfdt" path="res://scripts/grid_manager_2d.gd" id="5_grid"]
-[ext_resource type="Script" uid="uid://dknvoy2pml5j0" path="res://scripts/word_manager.gd" id="6_word"]
+[ext_resource type="Texture2D" uid="uid://di70yhp84tt7t" path="res://assets/hint.png" id="7_nh41s"]
+[ext_resource type="Texture2D" uid="uid://d317g6h14ufou" path="res://assets/score_board.png" id="8_8rt3n"]
 [ext_resource type="Texture2D" uid="uid://bq17tca6r3hbo" path="res://assets/background.png" id="8_bg"]
+[ext_resource type="AudioStream" path="res://assets/bgm.mp3" id="9_bgm"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_4bxcq"]
 size = Vector2(1050, 300)
@@ -15,9 +17,9 @@ size = Vector2(1050, 300)
 script = ExtResource("1_main")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=750721584]
-position = Vector2(576, 324)
-scale = Vector2(0.41860467, 0.421875)
+scale = Vector2(0.9162011, 0.92131615)
 texture = ExtResource("8_bg")
+centered = false
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1728387783]
 position = Vector2(576, 324)
@@ -25,55 +27,94 @@ position = Vector2(576, 324)
 [node name="UI" type="CanvasLayer" parent="." unique_id=1015610274]
 
 [node name="ScoreLabel" type="Label" parent="UI" unique_id=467775191]
-offset_left = 24.0
-offset_top = 16.0
-offset_right = 206.0
-offset_bottom = 44.0
+offset_left = 32.0
+offset_top = 72.0
+offset_right = 182.0
+offset_bottom = 100.0
+rotation = -0.1583275
 theme_override_colors/font_color = Color(0.36078432, 0.2509804, 0.2, 1)
 theme_override_colors/font_outline_color = Color(1, 0.84313726, 0, 1)
 theme_override_constants/outline_size = 1
 theme_override_font_sizes/font_size = 20
 
 [node name="FoundWordsLabel" type="Label" parent="UI" unique_id=775443192]
-anchors_preset = 3
+visible = false
+anchors_preset = 1
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -280.0
-offset_top = -48.0
-offset_right = -16.0
-offset_bottom = -18.0
+offset_left = -264.0
+offset_bottom = 30.0
 grow_horizontal = 0
-grow_vertical = 0
 theme_override_colors/font_color = Color(0.36078432, 0.2509804, 0.2, 1)
 
-[node name="WordMeaningsLabel" type="Label" parent="UI" unique_id=211751779]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
+[node name="TimerLabel" type="Label" parent="UI" unique_id=888888881]
+visible = false
 offset_left = 32.0
-offset_top = -240.0
-offset_right = 332.0
-grow_vertical = 0
+offset_top = 110.0
+offset_right = 182.0
+offset_bottom = 140.0
+rotation = -0.1583275
 theme_override_colors/font_color = Color(0.36078432, 0.2509804, 0.2, 1)
 theme_override_colors/font_outline_color = Color(1, 0.84313726, 0, 1)
 theme_override_constants/outline_size = 1
-theme_override_font_sizes/font_size = 24
-vertical_alignment = 2
-autowrap_mode = 2
+theme_override_font_sizes/font_size = 18
+
+[node name="BoxStatsLabel" type="Label" parent="UI" unique_id=777777771]
+offset_left = 32.0
+offset_top = 580.0
+offset_right = 400.0
+offset_bottom = 610.0
+theme_override_colors/font_color = Color(0.36078432, 0.2509804, 0.2, 1)
+theme_override_colors/font_outline_color = Color(1, 0.84313726, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 14
+
+[node name="CloseButton" type="Button" parent="UI" unique_id=1753652916]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 64.0
+grow_horizontal = 0
+theme_type_variation = &"FlatButton"
+icon = ExtResource("3_8rt3n")
 
 [node name="UIManager" type="CanvasLayer" parent="." unique_id=1846212995]
 script = ExtResource("2_ui")
 
-[node name="LevelManager" type="Node" parent="." unique_id=1124646814]
-script = ExtResource("3_level")
-
 [node name="InputHandler2D" type="Node" parent="." unique_id=104363505]
 script = ExtResource("4_input")
 
-[node name="WordManager" type="Node" parent="." unique_id=574414867]
-script = ExtResource("6_word")
+[node name="ScoreBoard" type="Sprite2D" parent="." unique_id=925799941]
+position = Vector2(112, 80)
+rotation = -0.14836623
+texture = ExtResource("8_8rt3n")
+
+[node name="Hint" type="CanvasLayer" parent="." unique_id=1254997976]
+layer = 2
+follow_viewport_enabled = true
+
+[node name="Hint" type="Sprite2D" parent="Hint" unique_id=1823186403]
+position = Vector2(176, 544)
+texture = ExtResource("7_nh41s")
+
+[node name="WordMeaningsLabel" type="Label" parent="Hint" unique_id=211751779]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 41.0
+offset_top = -182.0
+offset_right = 321.0
+offset_bottom = -32.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.36078432, 0.2509804, 0.2, 1)
+theme_override_colors/font_outline_color = Color(1, 0.84313726, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 18
+vertical_alignment = 2
+autowrap_mode = 2
 
 [node name="GridManager2D" type="Node2D" parent="." unique_id=683932957]
 position = Vector2(576, 296)
@@ -81,3 +122,8 @@ script = ExtResource("5_grid")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="GridManager2D" unique_id=1990526204]
 mesh = SubResource("QuadMesh_4bxcq")
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="." unique_id=999888771]
+stream = ExtResource("9_bgm")
+volume_db = -10.0
+autoplay = true
