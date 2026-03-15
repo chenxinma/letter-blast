@@ -1,1 +1,0 @@
-8x8 pixel art, modern retro style, dust particle, light gray color #D3D3D3, circular dust mite shape, clean pixel edges, subtle texture, retro game particle, official art, centered shape --v 5.2 --ar 1:1 --pixel-perfect

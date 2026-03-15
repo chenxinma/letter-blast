@@ -1,1 +1,0 @@
-32x32 pixel art, modern retro style, bloom particle, light blue color #00BFFF, circular glow effect with fading edges, clean pixel edges, soft gradient, retro game particle, official art, centered shape --v 5.2 --ar 1:1 --pixel-perfect

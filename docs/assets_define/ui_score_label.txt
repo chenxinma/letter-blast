@@ -1,1 +1,0 @@
-200x40 pixel art, modern retro style, UI label, white text 'SCORE', bold pixel font, clean edges, retro gaming UI text, official art, centered text, no background --v 5.2 --ar 5:1 --pixel-perfect

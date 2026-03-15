@@ -1,1 +1,0 @@
-60x60 pixel art, modern retro style, locked word cell, dark gray color #404040 with padlock icon in center, clean pixel edges, muted appearance, Game UI element, official art, centered square, no outlines --v 5.2 --ar 1:1 --pixel-perfect

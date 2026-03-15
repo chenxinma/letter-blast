@@ -1,1 +1,0 @@
-60x60 pixel art, modern retro style, word highlight path segment 4, small yellow highlight #FFFF00 on bottom edge only, clean pixel edges, retro word selection UI, official art, centered square --v 5.2 --ar 1:1 --pixel-perfect

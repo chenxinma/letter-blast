@@ -1,1 +1,0 @@
-64x64 pixel art, modern retro style, hint button icon, light blue color #00C3FF, white pixel icon question mark '؟', clean pixel edges, circular border, retro gaming icon, official art, centered icon --v 5.2 --ar 1:1 --pixel-perfect

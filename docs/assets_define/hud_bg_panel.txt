@@ -1,1 +1,0 @@
-1920x120 pixel art, modern retro style, HUD panel, warm brown #A07350 top border, subtle gradient background, clean pixel edges, semi-transparent, retro gaming HUD, official art, centered layout, no text --v 5.2 --ar 16:1 --pixel-perfect

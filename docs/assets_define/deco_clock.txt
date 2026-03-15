@@ -1,1 +1,0 @@
-120x120 pixel art, modern retro style, wall clock, warm brown #A07350 circular frame, white clock face, black pixel hands at 3 o'clock position, clean pixel edges, retro classroom prop, official art, centered clock --v 5.2 --ar 1:1 --pixel-perfect

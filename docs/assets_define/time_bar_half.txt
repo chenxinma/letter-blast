@@ -1,1 +1,0 @@
-100x60 pixel art, modern retro style, time bar partial fill, light gray background #808080, bright green #00FF00 progress fill up to 50%, clean pixel edges, retro HUD element, official art, centered bar --v 5.2 --ar 5:3 --pixel-perfect

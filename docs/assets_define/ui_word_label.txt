@@ -1,1 +1,0 @@
-300x40 pixel art, modern retro style, UI label, white text 'WORDS LEFT', bold pixel font, clean edges, retro gaming UI text, official art, centered text, no background --v 5.2 --ar 15:2 --pixel-perfect

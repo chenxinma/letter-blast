@@ -1,1 +1,0 @@
-64x64 pixel art, modern retro style, completed badge, golden gradient #FFD700, white pixel check mark ✓ in center, clean edges, retro achievement UI, official art, centered icon --v 5.2 --ar 1:1 --pixel-perfect

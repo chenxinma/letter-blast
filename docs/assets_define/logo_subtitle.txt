@@ -1,1 +1,0 @@
-600x60 pixel art, modern retro style, lettering, light gray color #CCCCCC, pixel font,Small word 'Word Search Adventure', clean edges, no shadow, retro gaming subtitle, official art, centered text, no background --v 5.2 --ar 10:1 --pixel-perfect

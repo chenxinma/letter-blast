@@ -1,1 +1,0 @@
-400x80 pixel art, modern retro style, UI text, white text 'FINAL SCORE', bold pixel font, clean edges, retro gaming text, official art, centered text, no background --v 5.2 --ar 5:1 --pixel-perfect

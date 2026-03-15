@@ -1,1 +1,0 @@
-60x60 pixel art, modern retro style, cell texture pattern B, white background #FFFFFF with dot pattern in light gray #D3D3D3, clean pixel edges, retro texture tile, official art, centered pattern --v 5.2 --ar 1:1 --pixel-perfect

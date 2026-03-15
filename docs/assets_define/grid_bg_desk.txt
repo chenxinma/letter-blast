@@ -1,1 +1,0 @@
-4x6 pixel art, modern retro style, wooden desk surface, warm brown color #A07350, pixel-perfect wood texture, no outlines, soft shadows, 8x8 grid pattern visible, Game asset, clean edges, 2D top-down view, official art --v 5.2 --ar 4:6 --pixel-perfect
