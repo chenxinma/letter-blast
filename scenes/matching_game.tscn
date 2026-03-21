@@ -1,0 +1,381 @@
+[gd_scene format=3 uid="uid://matchinggame"]
+
+[ext_resource type="Script" uid="uid://caig2v0llbk2l" path="res://scripts/matching_game.gd" id="1_matching"]
+[ext_resource type="Texture2D" uid="uid://bp7qgweevdqvu" path="res://assets/close.svg" id="2_f74mb"]
+[ext_resource type="Texture2D" uid="uid://d168xlek1g8ov" path="res://assets/match_background.png" id="2_xu365"]
+[ext_resource type="Texture2D" uid="uid://duj3jhki2x8ws" path="res://assets/sprites.png" id="3_c7x64"]
+[ext_resource type="AudioStream" uid="uid://bw33eg5liu1qi" path="res://assets/click.mp3" id="4_click"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c7x64"]
+shadow_color = Color(0, 0, 0, 0.5)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xu365"]
+load_path = "res://.godot/imported/sprites.png-bb36f92a96c2b9ad48a8528dbf01963e.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5npqy"]
+texture = SubResource("CompressedTexture2D_xu365")
+texture_margin_left = 22.0
+texture_margin_top = 22.0
+texture_margin_right = 22.0
+texture_margin_bottom = 22.0
+region_rect = Rect2(177, 0.5, 149, 149.5)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rmxpr"]
+texture = ExtResource("3_c7x64")
+texture_margin_left = 22.0
+texture_margin_top = 22.0
+texture_margin_right = 22.0
+texture_margin_bottom = 22.0
+region_rect = Rect2(177, 154, 150, 147)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_c7x64"]
+size = Vector2(200, 280)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c7x64"]
+texture = ExtResource("3_c7x64")
+texture_margin_left = 10.0
+texture_margin_top = 20.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(0, 0, 101, 100)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fkr0k"]
+texture = ExtResource("3_c7x64")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 11.0
+texture_margin_bottom = 12.0
+region_rect = Rect2(0, 264, 145, 52)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6kkgr"]
+texture = ExtResource("3_c7x64")
+texture_margin_left = 13.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 11.0
+region_rect = Rect2(0, 209, 145, 52)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hvtl8"]
+texture = ExtResource("3_c7x64")
+texture_margin_left = 13.0
+texture_margin_top = 11.0
+texture_margin_right = 12.0
+texture_margin_bottom = 13.0
+region_rect = Rect2(0, 154, 145, 52)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_djg2g"]
+texture = ExtResource("3_c7x64")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 11.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(156, 319, 145, 49)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4gc4l"]
+texture = ExtResource("3_c7x64")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(0, 319, 144, 49)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h5q6h"]
+texture = ExtResource("3_c7x64")
+texture_margin_left = 13.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 13.0
+region_rect = Rect2(0, 154, 145, 52)
+
+[node name="MatchingGame" type="Control" unique_id=518752456]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_matching")
+
+[node name="MatchBackground" type="Sprite2D" parent="." unique_id=1673793044]
+position = Vector2(552, 296)
+texture = ExtResource("2_xu365")
+
+[node name="TitleLabel" type="Label" parent="." unique_id=820633102]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -48.0
+offset_right = 176.0
+offset_bottom = -14.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "🎯 记忆强化 - 连线挑战"
+label_settings = SubResource("LabelSettings_c7x64")
+horizontal_alignment = 1
+
+[node name="ProgressLabel" type="Label" parent="." unique_id=1423930108]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -60.0
+offset_right = -10.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.36, 0.25, 0.2, 1)
+theme_override_font_sizes/font_size = 16
+text = "进度: 0/0"
+horizontal_alignment = 1
+
+[node name="AccuracyLabel" type="Label" parent="." unique_id=900629176]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -60.0
+offset_right = 150.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.36, 0.25, 0.2, 1)
+theme_override_font_sizes/font_size = 16
+text = "正确率: 0%"
+horizontal_alignment = 1
+
+[node name="GameArea" type="Control" parent="." unique_id=681857849]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -200.0
+offset_right = 350.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftPanel" type="Panel" parent="GameArea" unique_id=113602077]
+layout_mode = 0
+offset_left = -18.0
+offset_top = 4.0
+offset_right = 214.0
+offset_bottom = 372.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_5npqy")
+
+[node name="WordsLabel" type="Label" parent="GameArea/LeftPanel" unique_id=1358609793]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -37.0
+offset_top = 24.0
+offset_right = 40.0
+offset_bottom = 54.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(1, 0.58203125, 0.58203125, 0.5019608)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 8
+theme_override_font_sizes/font_size = 21
+text = "WORDS"
+horizontal_alignment = 1
+
+[node name="RightPanel" type="Panel" parent="GameArea" unique_id=1264259780]
+layout_mode = 0
+offset_left = 486.0
+offset_top = 4.0
+offset_right = 718.0
+offset_bottom = 372.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_rmxpr")
+
+[node name="DefinitionsLabel" type="Label" parent="GameArea/RightPanel" unique_id=1952230979]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -36.0
+offset_top = 24.0
+offset_right = 41.0
+offset_bottom = 54.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0.4246521, 0.57876945, 0.98828125, 0.5019608)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 8
+theme_override_font_sizes/font_size = 21
+text = "DEFINITIONS"
+horizontal_alignment = 1
+
+[node name="LineContainer" type="Control" parent="GameArea" unique_id=1905191642]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_top = 4.0
+offset_right = 18.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LeftContainer" type="VBoxContainer" parent="GameArea" unique_id=796433805]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -129.0
+offset_right = 198.0
+offset_bottom = 151.0
+grow_vertical = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="GameArea/LeftContainer" unique_id=1434769402]
+texture = SubResource("PlaceholderTexture2D_c7x64")
+centered = false
+
+[node name="RightContainer" type="VBoxContainer" parent="GameArea" unique_id=147338296]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -198.0
+offset_top = -124.0
+offset_right = 2.0
+offset_bottom = 156.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="GameArea/RightContainer" unique_id=2013759107]
+texture = SubResource("PlaceholderTexture2D_c7x64")
+centered = false
+
+[node name="CompletePanel" type="Panel" parent="." unique_id=198994426]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c7x64")
+
+[node name="CompleteTitle" type="Label" parent="CompletePanel" unique_id=1821868411]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 20.0
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.36, 0.25, 0.2, 1)
+theme_override_font_sizes/font_size = 22
+text = "✅ 挑战完成"
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="CompletePanel" unique_id=125350650]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -40.0
+offset_right = 150.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.36, 0.25, 0.2, 1)
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BonusLabel" type="Label" parent="CompletePanel" unique_id=618647219]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 80.0
+offset_bottom = 110.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.2, 0.8, 0.2, 1)
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="CompletePanel" unique_id=1460395633]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.36, 0.25, 0.2, 1)
+theme_override_font_sizes/font_size = 18
+text = "继续"
+
+[node name="BackButton" type="Button" parent="." unique_id=1708797317]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 64.0
+grow_horizontal = 0
+theme_type_variation = &"FlatButton"
+icon = ExtResource("2_f74mb")
+
+[node name="WordButtonSample" type="Button" parent="." unique_id=170659770]
+visible = false
+custom_minimum_size = Vector2(200, 56)
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 48.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_fkr0k")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_6kkgr")
+theme_override_styles/hover = SubResource("StyleBoxTexture_hvtl8")
+
+[node name="DefinitionButtonSample" type="Button" parent="." unique_id=353399612]
+visible = false
+custom_minimum_size = Vector2(200, 56)
+layout_mode = 0
+offset_top = 56.0
+offset_right = 200.0
+offset_bottom = 112.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_djg2g")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_4gc4l")
+theme_override_styles/hover = SubResource("StyleBoxTexture_h5q6h")
+
+[node name="ClickPlayer" type="AudioStreamPlayer" parent="." unique_id=999888777]
+stream = ExtResource("4_click")

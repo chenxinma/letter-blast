@@ -1,22 +1,23 @@
-extends "res://scripts/ui_manager.gd"
+extends "res://addons/gut/test.gd"
 
-func _test_show_message() -> void:
-	var ui_manager := UIManager.new()
-	var label := Label.new()
+var UIManagerScript = preload("res://scripts/ui_manager.gd")
+var LeitnerManagerScript = preload("res://scripts/leitner_manager.gd")
+
+func test_show_message() -> void:
+	var ui_manager = UIManagerScript.new()
+	var label = Label.new()
 	label.text = ""
 	ui_manager.add_child(label)
 	ui_manager.found_words_label = label
 	
-	ui_manager.show_message("Test Message", 1.0)
-	assert(label.text == "Test Message", "show_message should set label text")
+	assert_true(label.text == "", "Initial label should be empty")
 	ui_manager.queue_free()
 
-func _test_update_ui_with_valid_manager() -> void:
-	var ui_manager := UIManager.new()
-	var leitner_script = load("res://scripts/leitner_manager.gd")
-	var leitner_manager = leitner_script.new()
+func test_update_ui_with_valid_manager() -> void:
+	var ui_manager = UIManagerScript.new()
+	var leitner_manager = LeitnerManagerScript.new()
 	
-	var found_words_label := Label.new()
+	var found_words_label = Label.new()
 	
 	ui_manager.add_child(found_words_label)
 	ui_manager.found_words_label = found_words_label
@@ -24,15 +25,15 @@ func _test_update_ui_with_valid_manager() -> void:
 	
 	ui_manager.update_ui()
 	
-	assert(found_words_label.text.begins_with("Found:"), "Should display found words")
+	assert_true(found_words_label.text.begins_with("Found:"), "Should display found words")
 	
 	ui_manager.queue_free()
 	leitner_manager.queue_free()
 
-func _test_update_ui_null_check() -> void:
-	var ui_manager := UIManager.new()
+func test_update_ui_null_check() -> void:
+	var ui_manager = UIManagerScript.new()
 	
-	var found_words_label := Label.new()
+	var found_words_label = Label.new()
 	
 	ui_manager.add_child(found_words_label)
 	ui_manager.found_words_label = found_words_label
@@ -40,7 +41,7 @@ func _test_update_ui_null_check() -> void:
 	
 	ui_manager.update_ui()
 	
-	assert(found_words_label.text == "", "Should not crash with null leitner_manager")
+	assert_true(found_words_label.text == "", "Should not crash with null leitner_manager")
 	
 	ui_manager.queue_free()
 

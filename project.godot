@@ -18,12 +18,16 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalWordManager="*res://scripts/global_word_manager.gd"
+GameStateManager="*res://scripts/game_state_manager.gd"
+SettingsManager="*res://scripts/settings_manager.gd"
+StatsManager="*res://scripts/stats_manager.gd"
+LeitnerManager="*res://scripts/leitner_manager.gd"
 SceneManager="*uid://2iy8wfgenjka"
 Scenes="*uid://larj2tqblw3f"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/scene_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/codeandweb.texturepacker/plugin.cfg", "res://addons/scene_manager/plugin.cfg", "res://addons/sprite_frames_exported_textures/plugin.cfg")
 
 [importer]
 
@@ -37,6 +41,4 @@ ignore="docs"
 
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
 viewport/hdr_2d=true

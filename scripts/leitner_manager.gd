@@ -1,5 +1,3 @@
-class_name LeitnerManager
-
 extends Node
 
 const SAVE_FILE = "user://learning_progress.json"

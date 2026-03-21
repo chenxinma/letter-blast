@@ -1,11 +1,10 @@
 extends Node2D
 
-const LeitnerManagerScript = preload("res://scripts/leitner_manager.gd")
-
 @onready var grid_manager = $GridManager2D
 @onready var input_handler: Node = $InputHandler2D
-@onready var ui_manager: UIManager = $UIManager
+@onready var ui_manager: Node = $UIManager
 @onready var close_button: Button = $"UI/CloseButton"
+@onready var match_button: Button = $"UI/MatchButton"
 @onready var bgm_player: AudioStreamPlayer = $BGMPlayer
 
 var leitner_manager: Node
@@ -17,6 +16,20 @@ const TIME_LIMIT: int = 180
 
 
 func _ready() -> void:
+	# 确保全局单例存在
+	var settings_manager = get_node_or_null("/root/SettingsManager")
+	if not settings_manager:
+		var settings_script = load("res://scripts/settings_manager.gd")
+		settings_manager = settings_script.new()
+		settings_manager.name = "SettingsManager"
+		get_tree().root.add_child(settings_manager)
+	
+	var stats_manager = get_node_or_null("/root/StatsManager")
+	if not stats_manager:
+		var stats_script = load("res://scripts/stats_manager.gd")
+		stats_manager = stats_script.new()
+		stats_manager.name = "StatsManager"
+		get_tree().root.add_child(stats_manager)
 	grid_manager.cell_template = preload("res://scenes/word_cell_2d.tscn")
 	
 	input_handler.grid_manager = grid_manager
@@ -27,6 +40,7 @@ func _ready() -> void:
 	input_handler.connect("word_validated", _on_word_validated)
 	leitner_manager.connect("game_completed", _on_game_completed)
 	close_button.connect("pressed", _on_close_button_pressed)
+	match_button.connect("pressed", _on_match_button_pressed)
 	bgm_player.connect("finished", _on_bgm_finished)
 
 
@@ -46,12 +60,11 @@ func _input(event: InputEvent) -> void:
 
 
 func setup_managers() -> void:
-	leitner_manager = LeitnerManagerScript.new()
+	leitner_manager = get_node_or_null("/root/LeitnerManager")
 	timer_manager = TimerManager.new()
 	score_manager = ScoreManager.new()
 	hint_manager = HintManager.new()
 	
-	add_child(leitner_manager)
 	add_child(timer_manager)
 	add_child(score_manager)
 	add_child(hint_manager)
@@ -102,14 +115,43 @@ func _on_game_complete() -> void:
 	)
 	
 	leitner_manager.update_score(score_manager.total_score)
-	leitner_manager.on_game_complete()
 	
 	print("Game Complete! Total Score: ", score_manager.total_score)
 	
 	ui_manager.update_ui()
 	
+	# 保存游戏数据用于跨场景传递（在on_game_complete之前获取，因为on_game_complete会清空current_game_words）
+	var words_info = leitner_manager.get_current_game_words_info()
+	var found_words = leitner_manager.get_found_words()
+	var missed_words = leitner_manager.get_remaining_words()
+	
+	var game_words = []
+	for word_info in words_info:
+		game_words.append(word_info.get("en", ""))
+	
+	# 现在调用on_game_complete，会更新Leitner盒子并清空current_game_words
+	leitner_manager.on_game_complete()
+	
+	GameStateManager.set_last_game_data(
+		game_words,
+		words_info,
+		score_manager.total_score,
+		timer_manager.time_remaining,
+		found_words,
+		missed_words
+	)
+	
+	# 更新统计数据
+	StatsManager.start_new_game()
+	for word in found_words:
+		StatsManager.record_word_found()
+	for word in missed_words:
+		StatsManager.record_word_missed()
+	StatsManager.add_score(score_manager.total_score)
+	
 	await get_tree().create_timer(2.0).timeout
-	start_new_game()
+	# 进入连线游戏
+	get_tree().change_scene_to_file("res://scenes/matching_game.tscn")
 
 
 func _on_game_completed(words_found: Array, words_missed: Array) -> void:
@@ -118,6 +160,30 @@ func _on_game_completed(words_found: Array, words_missed: Array) -> void:
 
 func _on_close_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/start_screen.tscn")
+
+
+func _on_match_button_pressed() -> void:
+	timer_manager.stop_timer()
+	
+	# 保存当前游戏数据用于连线游戏
+	var words_info = leitner_manager.get_current_game_words_info()
+	var found_words = leitner_manager.get_found_words()
+	var missed_words = leitner_manager.get_remaining_words()
+	
+	var game_words = []
+	for word_info in words_info:
+		game_words.append(word_info.get("en", ""))
+	
+	GameStateManager.set_last_game_data(
+		game_words,
+		words_info,
+		score_manager.total_score,
+		timer_manager.time_remaining,
+		found_words,
+		missed_words
+	)
+	
+	get_tree().change_scene_to_file("res://scenes/matching_game.tscn")
 
 
 func _on_bgm_finished() -> void:

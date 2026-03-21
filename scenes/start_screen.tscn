@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dixxsa4004j3d" path="res://assets/Play.png" id="4_play"]
 [ext_resource type="Material" uid="uid://glowrainmat" path="res://resources/glow_rain_process_material.tres" id="5_particlemat"]
 [ext_resource type="Environment" uid="uid://bbaym4xccop48" path="res://resources/start_screen_environment.tres" id="6_env"]
-[ext_resource type="AudioStream" path="res://assets/click.mp3" id="7_click"]
+[ext_resource type="AudioStream" uid="uid://bw33eg5liu1qi" path="res://assets/click.mp3" id="7_click"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_normal"]
 atlas = ExtResource("4_play")
@@ -75,8 +75,17 @@ size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.36, 0.25, 0.2, 1)
 theme_override_colors/font_outline_color = Color(1, 0.84, 0, 1)
 theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 21
 text = "Load Words"
+
+[node name="ProgressButton" type="Button" parent="VBoxContainer" unique_id=999888777]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.36, 0.25, 0.2, 1)
+theme_override_colors/font_outline_color = Color(1, 0.84, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 20
+text = "My Progress"
 
 [node name="StatusLabel" type="Label" parent="." unique_id=836473980]
 layout_mode = 1
