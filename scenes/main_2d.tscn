@@ -129,6 +129,7 @@ theme_type_variation = &"FlatButton"
 icon = ExtResource("3_8rt3n")
 
 [node name="MatchButton" type="Button" parent="UI" unique_id=1302058256]
+visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
