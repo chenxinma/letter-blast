@@ -31,7 +31,7 @@ enabled=PackedStringArray("res://addons/codeandweb.texturepacker/plugin.cfg", "r
 
 [importer]
 
-ignore="docs"
+ignore=PackedStringArray("docs")
 
 [physics]
 

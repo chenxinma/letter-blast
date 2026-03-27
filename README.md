@@ -2,6 +2,8 @@
 
 A word search puzzle game built with Godot 4.6.
 
+![Gameplay Screenshot](docs/screen/screen2.png)
+
 ## Description
 
 Letter-Blast is an engaging word search game where players find hidden words in a 15×4 grid. Drag your mouse through adjacent cells to form words, and validate them against the word library. The game features the Leitner Box spaced repetition system to help players learn and remember words effectively.
@@ -17,7 +19,9 @@ Letter-Blast is an engaging word search game where players find hidden words in 
 4. **Validate**: Release to submit your word
    - Valid words are marked as found
    - Invalid words are rejected
-5. **Complete Game**: Find all 4 words to complete the game and advance
+5. **Complete Game**: Find all 4 words to complete the game
+6. **Matching Game**: After completing the grid, play a word-meaning matching game
+7. **View Results**: See your final score and learning progress
 
 ## Tech Stack
 
@@ -32,7 +36,8 @@ Letter-Blast is an engaging word search game where players find hidden words in 
 letter-blast/
 ├── data/
 │   ├── words.json               # Word library (19 words with Chinese translations)
-│   └── vocabulary-xixi.json     # Extended vocabulary (optional)
+│   ├── vocabulary-xixi.json     # Extended vocabulary (optional)
+│   └── learning_progress.json   # Learning progress data
 ├── scripts/
 │   ├── main_2d.gd              # Main game scene controller
 │   ├── grid_manager_2d.gd      # Grid generation and word placement (15×4)
@@ -42,27 +47,41 @@ letter-blast/
 │   ├── score_manager.gd        # Score calculation and management
 │   ├── timer_manager.gd        # Game timer (180 seconds)
 │   ├── hint_manager.gd         # Hint system (3 hints per game)
+│   ├── hint_panel.gd           # Hint panel UI
 │   ├── ui_manager.gd           # UI updates and display
 │   ├── word_cell_2d.gd         # Individual cell component
 │   ├── start_screen.gd         # Start screen controller
-│   └── global_word_manager.gd  # Global word management
+│   ├── global_word_manager.gd  # Global word management
+│   ├── game_state_manager.gd   # Game state management
+│   ├── game_complete_screen.gd # Game completion screen
+│   ├── matching_game.gd        # Word-meaning matching game
+│   ├── progress_screen.gd      # Learning progress screen
+│   ├── badge.gd                # Badge component
+│   ├── settings_manager.gd     # Settings management
+│   └── stats_manager.gd        # Statistics tracking
 ├── scenes/
 │   ├── main_2d.tscn            # Main game scene (2D)
 │   ├── word_cell_2d.tscn       # Word cell scene template
 │   ├── start_screen.tscn       # Start menu scene
-│   └── loading.tscn            # Loading screen
+│   ├── loading.tscn            # Loading screen
+│   ├── game_complete_screen.tscn # Game completion screen
+│   ├── matching_game.tscn      # Matching game scene
+│   ├── progress_screen.tscn    # Progress screen scene
+│   └── badge.tscn              # Badge scene template
 ├── tests/
 │   ├── test_word_manager.gd    # WordManager unit tests
 │   └── test_ui_manager.gd      # UIManager tests
 ├── docs/                        # Documentation
 │   ├── 游戏策划方案.md          # Game design document (Chinese)
+│   ├── letter-blast-游戏策划补充稿.md
 │   ├── system-design.md        # System architecture document
 │   ├── 美术风格.md              # Art style guidelines
-│   ├── 视觉资产清单.md          # Visual assets inventory
 │   ├── performance_results.md  # Performance test results
-│   ├── plans/                  # Implementation plans
-│   └── assets_define/          # Asset definitions
+│   └── screen/                 # Screenshots
 ├── resources/                   # Godot resource files
+├── shaders/                     # Shader files
+│   ├── pixelate.gdshader
+│   └── outline.gdshader
 ├── project.godot               # Godot project configuration
 └── README.md                   # This file
 ```
@@ -82,7 +101,7 @@ letter-blast/
 
 ## Features
 
-### Core Features (Implemented)
+### Core Features
 - ✅ Dynamic grid generation (15×4)
 - ✅ Word placement algorithm with collision detection
 - ✅ Drag-based input with path validation
@@ -95,7 +114,25 @@ letter-blast/
 - ✅ Word meanings display (English + Chinese)
 - ✅ Learning progress tracking
 - ✅ Start screen with word import
-- ✅ Background music support
+
+### Game Modes
+- ✅ **Grid Game**: Find hidden words in the letter grid
+- ✅ **Matching Game**: Match words with their meanings after completing the grid
+- ✅ **Progress Screen**: View learning statistics and earned badges
+
+### Scoring System
+- Base score based on word length
+- Time bonus for remaining time
+- Perfect game bonus (+100 if >50% time remains)
+- Matching game score (20 points per correct match)
+
+### Badge System
+Earn badges for achievements:
+- Word mastery badges (10, 50, 100, 200 words)
+- Perfect game badges
+- High accuracy badge (90%+)
+- Score milestones
+- Time played milestones
 
 ### Word Library
 Currently contains 19 fruit-related words:
@@ -124,7 +161,7 @@ The game implements the Leitner Box method for spaced repetition:
 
 ### Scoring System
 
-**Base Score by Word Length:**
+**Grid Game - Base Score by Word Length:**
 
 | Word Length | Base Score | Multiplier | Final Score |
 |-------------|------------|------------|-------------|
@@ -132,6 +169,11 @@ The game implements the Leitner Box method for spaced repetition:
 | 4-5 letters | 20 | ×1.5 | 30 |
 | 6-7 letters | 40 | ×2.0 | 80 |
 | 8+ letters | 80 | ×3.0 | 240 |
+
+**Matching Game:**
+- 20 points per correct match
+- -5 points per wrong attempt
+- +50 perfect bonus (no wrong attempts)
 
 **Time Bonus:** 0.5 points per remaining second
 **Perfect Bonus:** +100 points if >50% time remains
@@ -202,9 +244,9 @@ Learning progress is automatically saved to:
 ## Documentation
 
 - [游戏策划方案.md](docs/游戏策划方案.md) - Complete game design document (Chinese)
+- [letter-blast-游戏策划补充稿.md](docs/letter-blast-游戏策划补充稿.md) - Game design supplement
 - [system-design.md](docs/system-design.md) - System architecture and technical details
 - [美术风格.md](docs/美术风格.md) - Art style guidelines (Chinese)
-- [视觉资产清单.md](docs/视觉资产清单.md) - Visual assets inventory (Chinese)
 - [performance_results.md](docs/performance_results.md) - Performance test results
 
 ## License
