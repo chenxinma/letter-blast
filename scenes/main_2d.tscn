@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ykdeujx40pjq" path="res://scripts/main_2d.gd" id="1_main"]
 [ext_resource type="Script" uid="uid://cup5xkg5clu5v" path="res://scripts/ui_manager.gd" id="2_ui"]
-[ext_resource type="Texture2D" uid="uid://bp7qgweevdqvu" path="res://assets/close.svg" id="3_8rt3n"]
+[ext_resource type="Texture2D" uid="uid://dwgn4x22oivb" path="res://assets/back.svg" id="3_bhn1q"]
 [ext_resource type="Script" uid="uid://3tx0d01xcrjh" path="res://scripts/input_handler_2d.gd" id="4_input"]
 [ext_resource type="Script" uid="uid://cbijeprt2bfdt" path="res://scripts/grid_manager_2d.gd" id="5_grid"]
 [ext_resource type="Texture2D" uid="uid://di70yhp84tt7t" path="res://assets/hint.png" id="7_nh41s"]
@@ -120,13 +120,13 @@ text = "仅英文"
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -64.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = 64.0
+offset_left = -52.0
+offset_top = 16.0
+offset_right = 4.0
+offset_bottom = 72.0
 grow_horizontal = 0
 theme_type_variation = &"FlatButton"
-icon = ExtResource("3_8rt3n")
+icon = ExtResource("3_bhn1q")
 
 [node name="MatchButton" type="Button" parent="UI" unique_id=1302058256]
 visible = false

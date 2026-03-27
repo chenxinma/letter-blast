@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://b1ye54sjjadcn"]
 
 [ext_resource type="Script" uid="uid://cr1gywoaasple" path="res://scripts/progress_screen.gd" id="1_progress"]
-[ext_resource type="Texture2D" uid="uid://bp7qgweevdqvu" path="res://assets/close.svg" id="2_p2k07"]
 [ext_resource type="Texture2D" uid="uid://dgas217pa5u0v" path="res://assets/completed_background.jpeg" id="2_wp4b3"]
+[ext_resource type="Texture2D" uid="uid://dwgn4x22oivb" path="res://assets/back.svg" id="3_wp4b3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wp4b3"]
 bg_color = Color(1, 0.6, 0.8, 1)
@@ -386,10 +386,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -64.0
+offset_left = -52.0
 offset_top = 8.0
-offset_right = -8.0
+offset_right = 4.0
 offset_bottom = 64.0
 grow_horizontal = 0
 theme_type_variation = &"FlatButton"
-icon = ExtResource("2_p2k07")
+icon = ExtResource("3_wp4b3")

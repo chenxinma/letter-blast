@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://matchinggame"]
 
 [ext_resource type="Script" uid="uid://caig2v0llbk2l" path="res://scripts/matching_game.gd" id="1_matching"]
-[ext_resource type="Texture2D" uid="uid://bp7qgweevdqvu" path="res://assets/close.svg" id="2_f74mb"]
 [ext_resource type="Texture2D" uid="uid://d168xlek1g8ov" path="res://assets/match_background.png" id="2_xu365"]
 [ext_resource type="Texture2D" uid="uid://duj3jhki2x8ws" path="res://assets/sprites.png" id="3_c7x64"]
+[ext_resource type="Texture2D" uid="uid://dwgn4x22oivb" path="res://assets/back.svg" id="4_5npqy"]
 [ext_resource type="AudioStream" uid="uid://bw33eg5liu1qi" path="res://assets/click.mp3" id="4_click"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c7x64"]
@@ -348,13 +348,13 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -64.0
+offset_left = -52.0
 offset_top = 8.0
-offset_right = -8.0
+offset_right = 4.0
 offset_bottom = 64.0
 grow_horizontal = 0
 theme_type_variation = &"FlatButton"
-icon = ExtResource("2_f74mb")
+icon = ExtResource("4_5npqy")
 
 [node name="WordButtonSample" type="Button" parent="." unique_id=170659770]
 visible = false
