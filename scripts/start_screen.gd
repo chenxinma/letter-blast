@@ -35,7 +35,7 @@ func _on_progress_pressed() -> void:
 
 
 func _on_file_selected(path: String) -> void:
-	var result = GlobalWordManager.import_words_from_file(path)
+	var result = LeitnerManager.import_words_from_file(path)
 	
 	if result.success:
 		status_label.text = "导入成功: 新增 %d 词, 跳过 %d 词" % [result.added, result.skipped]

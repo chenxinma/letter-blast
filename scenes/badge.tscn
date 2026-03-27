@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://badge001"]
 
-[ext_resource type="Script" uid="uid://badge_script" path="res://scripts/badge.gd" id="1_badge"]
+[ext_resource type="Script" uid="uid://ci2l78obj7w54" path="res://scripts/badge.gd" id="1_badge"]
 
 [node name="Badge" type="Panel"]
 custom_minimum_size = Vector2(80, 80)

@@ -17,7 +17,6 @@ config/icon="uid://cqhl72wc38rbj"
 
 [autoload]
 
-GlobalWordManager="*res://scripts/global_word_manager.gd"
 GameStateManager="*res://scripts/game_state_manager.gd"
 SettingsManager="*res://scripts/settings_manager.gd"
 StatsManager="*res://scripts/stats_manager.gd"
